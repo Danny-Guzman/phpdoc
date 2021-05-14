@@ -1,5 +1,5 @@
 {
-    "name": "caweb/phpdoc.template",
+    "name": "caweb/phpdoc",
     "description": "phpDocumentor Template for the CAWeb Theme",
     "type": "project",
     "license": "MIT",
