@@ -1,5 +1,5 @@
 {
-    "name": "caweb/phpdoc",
+    "name": "caweb/phpdoc.template",
     "description": "phpDocumentor Template for the CAWeb Theme",
     "type": "project",
     "license": "MIT",
@@ -10,8 +10,5 @@
         }
     ],
     "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {"\\caweb\\": "src/"}
-    },
     "require": {}
 }
