@@ -5,12 +5,20 @@
 {% endblock head %}
 
 {% block introduction %}
-<h1>{{ node.name }}</h1>
-<i>{{ node.summary }}</i>
+<div id="file-intro" class="border-bottom border-info">
+    <h1>{{ node.name }}</h1>
+    <i class="d-block">{{ node.summary }}</i>
+    
+    {# Tags #}
+    {{ include('vendor/caweb/phpdoc/ssi/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+</div>
+
+
 {% endblock introduction %}
 
 {% block table_of_contents %}
-<div id="class-toc" class="mt-3">
+<div id="file-toc" class="mt-3">
+
 {# Interfaces, Classes and Traits #}
 {{ include('vendor/caweb/phpdoc/ssi/class-list.html') }}
 

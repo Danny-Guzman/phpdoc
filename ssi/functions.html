@@ -25,17 +25,9 @@
         {% endfor %}
         {% endif %}
 
-        {% for tagName,tags in o.tags if tagName in ['link', 'see'] %}
-        {% if loop.first %}
-        <strong>Tags</strong>
-        {% endif %}
-        <div>
-            {% for tag in tags %}
-            <p class="small mb-0">{{ tagName }}</p>
-            <p><a href="{{ tag.link }}">{{ tag.link }}</a></p>
-            {% endfor %}
-        </div>
-        {% endfor %}
+        {# Tags #}
+        {{ include('vendor/caweb/phpdoc/ssi/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+
 
         <strong>Return values</strong>
         <p class="small">{{ o.response.types ? o.response.types|join('|') }}</p>

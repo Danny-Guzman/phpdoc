@@ -7,6 +7,6 @@
 {% endmacro %}
 
 {% macro github_file_link(__file) %}
-<a href="https://github.com/CA-CODE-Works/CAWeb/blob/master/{{ __file.file.path ~ '#L' }}{{ __file.line }}">{{ __file.file.name }}</a> : {{ __file.line }}
+<a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/{{ __file.file.path ~ '#L' }}{{ __file.line }}">{{ __file.file.name }}</a> : {{ __file.line }}
 {% endmacro %}
 

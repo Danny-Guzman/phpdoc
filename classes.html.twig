@@ -5,6 +5,8 @@
 {% endblock head %}
 
 {% block introduction %}
+<div id="class-intro" class="border-bottom border-info">
+
 <h1>{{ node.name }}</h1>
 
 {# Class Extends #}
@@ -23,14 +25,18 @@
 {% endif %}
 
 {# Class Summary #}
-<i>{{ node.summary }}</i>
+<i class="d-block">{{ node.summary }}</i>
 
+{# Class Tags #}
+{{ include('vendor/caweb/phpdoc/ssi/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+</div>
 {% endblock introduction %}
 
 {% block table_of_contents %}
 
 {# Table of Contents #}
 <div id="class-toc" class="mt-3">
+    <h2>Table of Contents</h2>
     {# Class Properties #}
     {{ include('vendor/caweb/phpdoc/ssi/properties-toc.html') }}
     
