@@ -1,0 +1,27 @@
+{% set list_title = 'Interfaces, Classes and Traits' %}
+{# if listing all classes in namespaces #}
+{% if 'namespace' == opt %}
+    {% for namespace in project.indexes.namespaces|sort_asc %}
+        {% if namespace.classes|length > 0 %}
+            {% if loop.first %}
+            <h2>{{ list_title }}</h2>
+            {% endif %}
+            {% for class in namespace.classes|sort_asc %}
+            <div class="caweb-class">
+                <a href="{{ class|route(presentation = 'url') }}" class="ml-4">{{ class.name }}</a>
+                <i class="d-block ml-4">{{ class.name }}</i>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}{# end iteration of namespaces #}
+{% else %}{# if listing all classes in node #}
+    {% if node.classes|length > 0 %}
+    <h2>{{ list_title }}</h2>
+    {% for class in node.classes|sort_asc %}
+        <div class="caweb-class">
+            <a href="{{ class|route(presentation = 'url') }}" class="ml-4">{{ class.name }}</a>
+            <i class="d-block ml-4">{{ class.name }}</i>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endif %}

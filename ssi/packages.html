@@ -1,0 +1,6 @@
+{% if project.indexes.packages|length > 0 %}
+<h2>Packages</h2>
+{% for package in (project.indexes.packages|first).children|sort_asc %}
+{{ package.name }}
+{% endfor %}
+{% endif %}

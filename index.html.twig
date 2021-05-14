@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        {% block head %}
+        <title>CAWeb Theme Documentation</title>
+
+        {% endblock head %}
+        
+        {{ include('/template/ssi/head.html') }}
+    </head>
+    <body class="primary non_divi_builder">
+        {{ include('/template/ssi/header.html') }}
+
+        <div id="page-container">
+            <div id="et-main-area">
+
+                <div id="main-content" class="main-content" tabindex="-1">
+                    <main class="main-primary">
+                        {% block introduction %}
+                        {% endblock introduction %}
+                        
+                        {% block table_of_contents %}
+                            {# Packages #}
+                            {{ include('template/ssi/packages.html', {'opt': 'namespace'}) }}
+
+                            {# Interfaces, Classes and Traits #}
+                            {{ include('template/ssi/class-list.html', {'opt': 'namespace'}) }}
+                            
+                        {% endblock table_of_contents %}
+
+                        {% block body %}
+                        {% endblock body %}
+
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <!-- Load template core -->
+            <script src="{{ path('/')  }}js/caweb.core.js"></script>
+        </footer>
+    </body>
+</html>

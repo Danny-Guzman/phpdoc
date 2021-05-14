@@ -1,0 +1,12 @@
+{% macro correct_default(__value) %}
+{% set val = __value|trim %}
+{% set val = val matches '/rue/' ? "true" : val %}
+{% set val = val matches '/ull/' ? "null" : val %}
+{% set val = val matches '/alse/' ? "false" : val %}
+{{ val~';' }}
+{% endmacro %}
+
+{% macro github_file_link(__file) %}
+<a href="https://github.com/CA-CODE-Works/CAWeb/blob/master/{{ __file.file.path ~ '#L' }}{{ __file.line }}">{{ __file.file.name }}</a> : {{ __file.line }}
+{% endmacro %}
+

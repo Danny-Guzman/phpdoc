@@ -1,0 +1,12 @@
+{% set __pre = "" == prefix ? 'method' : prefix %}
+{% set __obj = "method" == __pre ? node.methods : []  %}
+{% set __obj = "function" == __pre ? node.functions : __obj %}
+
+{% if __obj|length > 0 %}
+{% for __o in __obj|sort_asc %}
+    <div class="mb-2">
+        <p class="mb-0"><a href="{{ __o|route(presentation = 'url') }}">{{ __o.name }}()</a> {{ __o.response.types ? ': '~__o.response.types|join('|') }}</p>
+        <i class="small text-muted">{{ __o.summary }}</i>
+    </div>
+{% endfor %}
+{% endif %} 

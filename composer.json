@@ -1,0 +1,17 @@
+{
+    "name": "caweb/phpdoc",
+    "description": "phpDocumentor Template for the CAWeb Theme",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danny Guzman",
+            "email": "guzmanjd86@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"\\caweb\\": "src/"}
+    },
+    "require": {}
+}
