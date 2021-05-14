@@ -1,4 +1,4 @@
-{% import "template/macros.twig" as macros %}
+{% import "vendor/caweb/phpdoc/macros.twig" as macros %}
 {% set __pre = "" == prefix ? 'method' : prefix %}
 {% set __obj = "method" == __pre ? node.methods|sort_asc : []  %}
 {% set __obj = "function" == __pre ? node.functions|sort_asc : __obj %}

@@ -6,10 +6,10 @@
 
         {% endblock head %}
         
-        {{ include('/template/ssi/head.html') }}
+        {{ include('/vendor/caweb/phpdoc/ssi/head.html') }}
     </head>
     <body class="primary non_divi_builder">
-        {{ include('/template/ssi/header.html') }}
+        {{ include('/vendor/caweb/phpdoc/ssi/header.html') }}
 
         <div id="page-container">
             <div id="et-main-area">
@@ -21,10 +21,10 @@
                         
                         {% block table_of_contents %}
                             {# Packages #}
-                            {{ include('template/ssi/packages.html', {'opt': 'namespace'}) }}
+                            {{ include('vendor/caweb/phpdoc/ssi/packages.html', {'opt': 'namespace'}) }}
 
                             {# Interfaces, Classes and Traits #}
-                            {{ include('template/ssi/class-list.html', {'opt': 'namespace'}) }}
+                            {{ include('vendor/caweb/phpdoc/ssi/class-list.html', {'opt': 'namespace'}) }}
                             
                         {% endblock table_of_contents %}
 

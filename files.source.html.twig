@@ -1,4 +1,4 @@
-{% extends "template/index.html.twig" %}
+{% extends "vendor/caweb/phpdoc/index.html.twig" %}
 
 {% block head %}
     <title>CAWeb Files</title>
@@ -12,11 +12,11 @@
 {% block table_of_contents %}
 <div id="class-toc" class="mt-3">
 {# Interfaces, Classes and Traits #}
-{{ include('template/ssi/class-list.html') }}
+{{ include('vendor/caweb/phpdoc/ssi/class-list.html') }}
 
 {# File Functions #}
-{{ include('template/ssi/functions-toc.html', {'prefix': 'function'}) }}
-{{ include('template/ssi/functions-toc.html', {'prefix': 'method'}) }}
+{{ include('vendor/caweb/phpdoc/ssi/functions-toc.html', {'prefix': 'function'}) }}
+{{ include('vendor/caweb/phpdoc/ssi/functions-toc.html', {'prefix': 'method'}) }}
 </div>
 {% endblock table_of_contents %}
 
@@ -29,7 +29,7 @@
                             
 {% else %}
     {# File Functions #}
-    {{ include('template/ssi/functions.html', {'prefix': 'function'}) }}
+    {{ include('vendor/caweb/phpdoc/ssi/functions.html', {'prefix': 'function'}) }}
 
 {% endif %}
 

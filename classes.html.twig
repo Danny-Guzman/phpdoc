@@ -1,4 +1,4 @@
-{% extends "template/index.html.twig" %}
+{% extends "vendor/caweb/phpdoc/index.html.twig" %}
 
 {% block head %}
     <title>CAWeb Classes Documentation</title>
@@ -32,17 +32,17 @@
 {# Table of Contents #}
 <div id="class-toc" class="mt-3">
     {# Class Properties #}
-    {{ include('template/ssi/properties-toc.html') }}
+    {{ include('vendor/caweb/phpdoc/ssi/properties-toc.html') }}
     
     {# Class Methods #}
-    {{ include('template/ssi/functions-toc.html', {'prefix': 'method'}) }}
+    {{ include('vendor/caweb/phpdoc/ssi/functions-toc.html', {'prefix': 'method'}) }}
 </div>
 {% endblock table_of_contents %}
 
 {% block body %}
 {# Class Properties #}
-{{ include('template/ssi/properties.html') }}
+{{ include('vendor/caweb/phpdoc/ssi/properties.html') }}
 
 {# Class Methods #}
-{{ include('template/ssi/functions.html', {'prefix': 'method'}) }}
+{{ include('vendor/caweb/phpdoc/ssi/functions.html', {'prefix': 'method'}) }}
 {% endblock body %}
