@@ -1,0 +1,27 @@
+{% extends "vendor/caweb/phpdoc/index.html.twig" %}
+{% import "vendor/caweb/phpdoc/macros.twig" as macros %}
+
+{% block head %}
+<title>CAWeb Theme Documentation</title>
+
+{% endblock head %}
+
+{% block introduction %}
+
+
+{% endblock introduction %}
+
+{% block table_of_contents %}
+<h2>Actions</h2>
+{{ macros.wordpress_hooks() }}
+<h2>Filters</h2>
+{{ macros.wordpress_hooks('files', 'filter') }}
+
+<h2>Classes</h2>
+{{ macros.wordpress_hooks('classes') }}
+{{ macros.wordpress_hooks('classes', 'filter') }}
+
+{% endblock table_of_contents %}
+
+{% block body %}
+{% endblock body %}

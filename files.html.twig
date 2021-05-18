@@ -16,7 +16,7 @@
     {% set __new_index = file.name|first matches '/[0-9]/' ? '#' : file.name|first|upper %}
     {% if __index != __new_index %}
     {% set __index = __new_index %}
-    <strong id="{{ '#' == __new_index ? 'numbers' : __new_index }}">{{ __new_index }}</strong>
+    <strong id="{{ '#' == __new_index ? 'Numbers' : __new_index }}">{{ __new_index }}</strong>
     {% endif %}
 <p><a href="{{ file|route(presentation = 'url') }}">{{ file.name }}</a></p>
 {% endfor %}

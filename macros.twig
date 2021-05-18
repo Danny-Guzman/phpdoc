@@ -10,3 +10,64 @@
 <a target="_blank" href="https://github.com/CA-CODE-Works/CAWeb/blob/master/{{ __file.file.path ~ '#L' }}{{ __file.line }}">{{ __file.file.name }}</a> : {{ __file.line }}
 {% endmacro %}
 
+{% macro wordpress_hooks(__src = 'files', __hook = 'action') %}
+{% set hooks = [] %}
+{% set src = 'files' == __src ? project.files : project.indexes.classes%}
+
+{# iterate thru all project files #}
+{% for file in src|sort_asc %}
+    {% set funcs = 'files' == __src ? file.functions : file.methods  %}
+    {% if funcs|length > 0  %}
+        {# iterate thru all functions #}
+        {% for func in funcs|sort_asc %}
+            {% set is_action = '' %}
+            {# iterate thru function tags, if function has category tag reference save it #}
+            {% for tag_name,tags in func.tags if tag_name in ['category'] %}
+            {% set is_action = tags.0.description %}
+            {% endfor %}
+
+            {# if category tag was found #}
+            {% if is_action is not empty %}
+            {# get all hooks in description #}
+            {% set __hooks = '{' == is_action|first ? is_action|slice(1, is_action|length - 2 )|trim : is_action %}
+            {% set __hooks = __hooks|split('\n') %}
+                {% if __hooks|length > 0 %}
+                    {# iterate over category entries #}
+                    {% for __entry in __hooks %}
+                        {# if entry matches hook #}
+                        {% if "add_" ~ __hook == __entry|slice(0,10) %}
+                            {% set __entry = __entry|slice(("add_" ~ __hook)|length + 1) %}
+                            {% set __wp_action = __entry|split(',')[0] %}
+
+                            {% set __entry = __entry|replace({ (__wp_action ~ ',') : ""}) %}
+                            {% set __wp_action = __wp_action|replace({"'" : ""})|trim %}
+                            {% set __wp_action_link = __wp_action %}
+
+                            {% if __wp_action matches '/caweb_/' %}
+                            {% set __wp_action_link = __wp_action|split('caweb_')[0] ~ 'action' %}
+                            {% set __wp_action = __wp_action|split('caweb_')[0] ~ '{action}' %}
+                            {% endif %}
+
+                            {% set __callback = "'" == __entry|trim|first ? __entry|trim|slice(1)|split("'")[0] : __entry|split(')')[0] ~ ')' %}
+                            {% set __entry = "'" == __entry|trim|first ? __entry|replace({ ("'" ~ __callback ~ "'") : ""}) : __entry|replace({ (__callback) : ""}) %}
+
+                            {% set __priority = __entry|split(',')[1] is not empty ? __entry|split(',')[1] : '10' %}
+                            {% set __arg_count = __entry|split(',')[2] is not empty ? __entry|split(',')[2]|replace({')' : '', ';' : ''}) : '1' %}
+
+                            <p><a target="_blank" href="https://developer.wordpress.org/reference/hooks/{{ __wp_action_link }}">{{ __wp_action }}</a></p>
+                            <p>{{ func.description }}</p>
+                            <p>Callback function {{ __callback }}</p>
+                            {% if __priority is not empty %}
+                            <p>Priority {{ __priority|replace({')' : '', ';' : ''}) }}</p>
+                            {% endif %}
+                            {% if __arg_count is not empty %}
+                            <p>Arguments {{ __arg_count }}</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+{% endmacro %}
