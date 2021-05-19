@@ -5,7 +5,7 @@
     <div>
         {% for tag in tags %}
         <p class="small mb-0">{{ tagName }}</p>
-        <p><a href="{{ tag.link }}">{{ tag.link }}</a></p>
+        <p><a target="_blank" href="{{ tag.link }}">{{ tag.link }}</a></p>
         {% endfor %}
     </div>
 {% endfor %}
