@@ -1,3 +1,5 @@
+{% set __settings = project.settings.custom %}
+
 {% macro correct_default(__value) %}
 {% set val = __value|trim %}
 {% set val = val matches '/rue/' ? "true" : val %}
@@ -5,10 +7,8 @@
 {% set val = val matches '/alse/' ? "false" : val %}
 {{ val~';' }}
 {% endmacro %}
-{{ project.settings.custom['wp_hook_ref'] }}
 
 {% macro github_file_link(__prop) %}
-{% set __settings = project.settings.custom %}
 {% set __link = __settings['github_ref'] ~ __settings['github_user'] ~ '/CAWeb/blob/' ~ __settings['github_branch'] ~ '/' %}
 {% set __path = __prop.file.path %}
 {% set __line = __prop.line %}
@@ -16,13 +16,11 @@
 {% endmacro  %}
 
 {% macro wp_hook_link(__link, __action) %}
-{% set __settings = project.settings.custom %}
 {% set __link = __settings['wp_hook_ref'] ~ __link  %}
 <a target="_blank" href="{{ __link }}">{{ __action }}</a>
 {% endmacro  %}
 
 {% macro wordpress_hooks(__classes = false, __hook = 'action') %}
-{{ wp_hook_ref }}
 {# iterate thru all project files #}
 {% for __obj in project.files|sort_asc %}
     {% set functions = [] %}

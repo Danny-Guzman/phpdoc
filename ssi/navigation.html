@@ -1,7 +1,39 @@
+{% set __settings = project.settings.custom %}
+
 <nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item">
-            <a href="{{ path('/')}}files.html" class="first-level-link"><span class="ca-gov-icon-page"></span><span class="link-title">Files</span></a>
+        <li class="nav-item" title="How-To's">
+            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="{{ path('/')}}how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
+                        </li>
+                        <li class="unit1">
+                            <a href="{{ path('/')}}how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Theme Structure">
+            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1" title="Actions and Filters">
+                            <a href="{{ path('/')}}filters.html" class="second-level-link">Actions/Filters</a>
+                        </li>
+                        <li class="unit1" title="All Files">
+                            <a href="{{ path('/')}}files.html" class="second-level-link">All Files</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item" title="Download">
+            <a href="https://github.com/{{ __settings['github_user'] }}/CAWeb/archive/refs/tags/{{ __settings['stable_version'] }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>
