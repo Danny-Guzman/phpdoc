@@ -1,5 +1,3 @@
-{% set __settings = project.settings.custom %}
-
 {% macro correct_default(__value) %}
 {% set val = __value|trim %}
 {% set val = val matches '/rue/' ? "true" : val %}
@@ -9,6 +7,7 @@
 {% endmacro %}
 
 {% macro github_file_link(__prop) %}
+{% set __settings = project.settings.custom %}
 {% set __link = __settings['github_ref'] ~ __settings['github_user'] ~ '/CAWeb/blob/' ~ __settings['github_branch'] ~ '/' %}
 {% set __path = __prop.file.path %}
 {% set __line = __prop.line %}
@@ -16,9 +15,40 @@
 {% endmacro  %}
 
 {% macro wp_hook_link(__link, __action) %}
+{% set invalid_hooks = ['publish_future_post'] %}
+
+{% set __settings = project.settings.custom %}
 {% set __link = __settings['wp_hook_ref'] ~ __link  %}
+
+{% if __wp_action not in invalid_hooks %}
 <a target="_blank" href="{{ __link }}">{{ __action }}</a>
+{% endif %}
 {% endmacro  %}
+
+{# Used to correct dynamic wordpress action/filters #}
+{% macro wp_hook_corrections(__action) %}
+    {# if action has caweb_ action request #}
+    {% if __action matches '/caweb_/' %}
+        {% set __action = __action|split('caweb_')[0] ~ 'action' %}
+    {% endif %}
+
+    {# if action loads dynamic load-pagenow #}
+    {% if __action matches '/load-.*\.php/' %}
+        {% set __action = 'load-pagenow' %}
+    {% endif %}
+
+    {# if action loads dynamic admin_head #}
+    {% if __action matches '/admin_head-.*\.php/' %}
+        {% set __action = 'admin_head-hook-suffix' %}
+    {% endif %}
+
+    {# if action loads dynamic admin_footer #}
+    {% if __action matches '/admin_footer-.*\.php/' %}
+        {% set __action = 'admin_footer-globalshook_suffix' %}
+    {% endif %}
+
+    {{ __action }}
+{% endmacro %}
 
 {% macro wordpress_hooks(__classes = false, __hook = 'action') %}
 {# iterate thru all project files #}
@@ -68,13 +98,7 @@
             
                         {% set __entry = __entry|replace({ (__wp_action ~ ',') : ""}) %}
                         {% set __wp_action = __wp_action|replace({"'" : ""})|trim %}
-                        {% set __wp_action_link = __wp_action %}
-            
-                        {# if action has caweb_ action request, correct action and link replacing caweb_ with action #}
-                        {% if __wp_action matches '/caweb_/' %}
-                            {% set __wp_action_link = __wp_action|split('caweb_')[0] ~ 'action' %}
-                            {% set __wp_action = __wp_action|split('caweb_')[0] ~ '{$action}' %}
-                        {% endif %}
+                        {% set __wp_action_link = _self.wp_hook_corrections( __wp_action )|trim %}
 
                         {# get action callback function from entry #}
                         {% set __callback = "'" == __entry|trim|first ? __entry|trim|slice(1)|split("'")[0] : __entry|split(')')[0] ~ ')' %}
@@ -95,7 +119,7 @@
                             
                             <p>Priority: {{ __priority|replace({')' : '', ';' : ''}) }}</p>
                             
-                            {% if functions[__f].description is not empty %}
+                            {% if __arg_count is not empty %}
                             <p>Arguments: {{ __arg_count }}</p>
                             {% endif %}
                             
