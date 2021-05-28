@@ -2,21 +2,20 @@
 {% import "vendor/caweb/phpdoc/macros.twig" as macros %}
 
 {% block head %}
-<title>CAWeb Theme Documentation</title>
+<title>CAWeb Theme Actions/Filters</title>
 
 {% endblock head %}
 
 {% block introduction %}
-
+<h1>CAWeb Actions/Filters</h1>
+<p>This list should be viewed as a guide line or approximation of CAWeb Theme actions/filters.</p>
 
 {% endblock introduction %}
 
 {% block table_of_contents %}
-<h2>Actions</h2>
-{{ macros.wordpress_hooks(true) }}
+{{ macros.wordpress_hooks('', true) }}
 
-<h2>Filters</h2>
-{{ macros.wordpress_hooks(true, 'filter') }}
+{{ macros.wordpress_hooks('', true, 'filter') }}
 
 {% endblock table_of_contents %}
 
