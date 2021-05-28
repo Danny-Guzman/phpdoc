@@ -32,12 +32,18 @@
 {% block body %}
 {% set l = '' %}
 <div class="container">
+{% set c = 0 %}
 {% for icon in icons %}
 {% if l != icon|first|upper %}
 {% set l = icon|first|upper %}
+{% if not loop.first and c is odd %}
+</div>
+{% set c = 0 %}
+{% endif %}
 <p class="h1 mt-4 border-bottom border-dark" id="icon-group-{{ l }}">{{ l }}</p>
 {% endif %}
-{% if loop.index % 2 %}
+
+{% if c is even %}
 <div class="row mt-4">
 {% endif %}
 <div class="col-6">
@@ -46,9 +52,12 @@
         <span class="font-size-20">ca-gov-icon-{{ icon }}</span>
     </div>
 </div>
-{% if loop.index0 % 2 %}
+
+{% if c is odd %}
 </div>
 {% endif %}
+
+{% set c = c + 1 %}
 {% endfor %}
 </div>
 {% endblock body %}
