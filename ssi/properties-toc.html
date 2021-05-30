@@ -1,8 +1,0 @@
-{% if node.properties|length > 0 %}
-    {% for property in node.properties|sort_asc %}
-    <div class="mb-2">
-        <p class="mb-0"><a href="{{ property|route(presentation = 'url') }}">${{ property.name }}</a> : {{ property.type|replace({'\\': ''}) }}</p>
-        <i class="small text-muted">Member Variable</i>
-    </div>
-    {% endfor %}
-{% endif %}

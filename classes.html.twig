@@ -1,4 +1,4 @@
-{% extends "vendor/caweb/phpdoc/index.html.twig" %}
+{% extends "vendor/caweb/phpdoc/layout.html.twig" %}
 
 {% block head %}
     <title>CAWeb Classes Documentation</title>
@@ -28,7 +28,7 @@
 <i class="d-block">{{ node.summary }}</i>
 
 {# Class Tags #}
-{{ include('vendor/caweb/phpdoc/ssi/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+{{ include('vendor/caweb/phpdoc/inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
 </div>
 {% endblock introduction %}
 
@@ -38,17 +38,36 @@
 <div id="class-toc" class="mt-3">
     <h2>Table of Contents</h2>
     {# Class Properties #}
-    {{ include('vendor/caweb/phpdoc/ssi/properties-toc.html') }}
+    {% if node.properties|length > 0 %}
+        {% for property in node.properties|sort_asc %}
+        <div class="mb-2">
+            <p class="mb-0"><a href="{{ property|route(presentation = 'url') }}">${{ property.name }}</a> : {{ property.type|replace({'\\': ''}) }}</p>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        {% endfor %}
+    {% endif %}
     
     {# Class Methods #}
-    {{ include('vendor/caweb/phpdoc/ssi/functions-toc.html', {'prefix': 'method'}) }}
 </div>
 {% endblock table_of_contents %}
 
 {% block body %}
 {# Class Properties #}
-{{ include('vendor/caweb/phpdoc/ssi/properties.html') }}
+{% if node.properties|length > 0 %}
+<div>
+    <h2>Properties</h2>
+    {% for property in node.properties|sort_asc %}
+    <div id="property_{{ property.name }}" class="border-bottom border-info">
+        <div>
+            <div class="pull-right">{{ macros.github_file_link(property) }}</div>
+            <strong class="d-block">${{ property.name }}</strong>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        <pre>{{ property.visibility }} {% if property.static %}static {% endif %}{{ property.type|replace({'\\': ''}) }} ${{ property.name }}{% if "" != property.default %} = {{ macros.correct_default(property.default) }}{% else %};{% endif %}</pre>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 {# Class Methods #}
-{{ include('vendor/caweb/phpdoc/ssi/functions.html', {'prefix': 'method'}) }}
 {% endblock body %}

@@ -1,4 +1,4 @@
-{% extends "vendor/caweb/phpdoc/index.html.twig" %}
+{% extends "vendor/caweb/phpdoc/layout.html.twig" %}
 {% import "vendor/caweb/phpdoc/macros.twig" as macros %}
 
 {% block head %}
@@ -13,10 +13,66 @@
 {% endblock introduction %}
 
 {% block table_of_contents %}
-{{ macros.wordpress_hooks('', true) }}
+    {% set functions = [] %}
+    
+    {# iterate thru all project files #}
+    {% for obj in project.files %}
+        {# iterate thru all file functions #}
+        {% for f in obj.functions|sort_asc %}
+            {# Save function information #}
+            {% set functions = functions|merge([f]) %}
+        {% endfor %}
 
-{{ macros.wordpress_hooks('', true, 'filter') }}
+        {# iterate thru classes in the file  #}
+        {% for class in obj.classes %}
+            {# iterate thru class methods #}
+            {% for c in class.methods|sort_asc %}
+                {# Save function information #}
+                {% set functions = functions|merge([c]) %}
+            {% endfor %}
+        {% endfor %}    
+    {% endfor %}
 
+    {# List any Action Hooks #}
+    <h2 id="actions">Actions</h2>
+    {% for function in functions %}
+        {# iterate thru function tags, if function has category tag reference save it #}
+        {% for tag_name,tags in function.tags %}
+            {% if tag_name in ['category']  %}
+                {% set h = tags.0.description %}
+
+                {# get all hooks in category #}
+                {% set hooks = '{' == h|first ? h|slice(1, h|length - 2 )|trim|split('\n') : h|split('\n') %}
+
+                {% for entry in hooks %}
+                    {% if "add_action" == entry|slice(0,10)  %}
+                        {{ include('vendor/caweb/phpdoc/inc/wp-hooks.html') }}
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    <h2 id="filters">Filters</h2>
+    {% for function in functions %}
+        {# iterate thru function tags, if function has category tag reference save it #}
+        {% for tag_name,tags in function.tags %}
+            {% if tag_name in ['category']  %}
+                {% set h = tags.0.description %}
+
+                {# get all hooks in category #}
+                {% set hooks = '{' == h|first ? h|slice(1, h|length - 2 )|trim|split('\n') : h|split('\n') %}
+
+                {% for entry in hooks %}
+                    {% if "add_filter" == entry|slice(0,10)  %}
+                        {{ include('vendor/caweb/phpdoc/inc/wp-hooks.html') }}
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 {% endblock table_of_contents %}
 
 {% block body %}
