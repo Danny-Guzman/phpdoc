@@ -18,7 +18,7 @@
     {% set __index = __new_index %}
     <strong id="{{ '#' == __new_index ? 'Numbers' : __new_index }}">{{ __new_index }}</strong>
     {% endif %}
-<p><a href="{{ file|route(presentation = 'url') }}">{{ file.name }}</a></p>
+<p><a href="{{ file|route(presentation = 'url') }}">{{ file.path }}</a></p>
 {% endfor %}
 
 {% endblock table_of_contents %}

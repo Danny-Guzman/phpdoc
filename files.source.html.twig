@@ -19,12 +19,12 @@
 {% set found_action, found_filter = false, false %}
 
 {% block head %}
-    <title>CAWeb Files</title>
+    <title>CAWeb {{node.path}} File</title>
 {% endblock head %}
 
 {% block introduction %}
 <div id="file-intro" class="border-bottom border-info">
-        <h1>{{ node.name }}<a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path }}">
+        <h1>{{ node.path }}<a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path }}">
                 <span class="ca-gov-icon-link d-inline h4"></span>
             </a>
         </h1>
