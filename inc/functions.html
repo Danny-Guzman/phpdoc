@@ -1,27 +1,22 @@
-{% set __obj = node.methods is not empty ? node.functions|merge(node.methods) : node.functions %}
-{% if __obj|length > 0 %}
-<div>
-    <h2 id="functions">Functions</h2>
-    {% for o in __obj %}
-    <div id="function-{{ o.name }}" class="mb-3{% if not loop.last %} border-bottom border-info{% endif %}">
-        <div>
-            <div class="pull-right">
-                <a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path ~ '#L' ~ o.line }}">{{ node.path }}</a> : {{ o.line }}
-            </div>
-            <strong class="d-block">{{ o.name }}()</strong>
-            <i class="small text-muted">{{ o.summary }}</i>
+{% set __prefix = __prefix is empty ? 'function' %}
+{% for function in functions %}
+<div id="{{ __prefix ~ '_' ~ function.name }}" class="mb-3{% if not loop.last %} border-bottom border-info{% endif %}">
+    <div>
+        <div class="pull-right">
+            <a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path ~ '#L' ~ function.line }}">{{ node.path }}</a> : {{ function.line }}
         </div>
-
-        <pre>{{ o.visibility ~ ' ' ~ o.name }}({% for __arg in o.arguments %}{{ __arg.types ? __arg.types|join('|')|replace({'\\': ''})~' ' }}{{ __arg.byReference ? '&' }}${{ __arg.name }}{{ __arg.default ? ' = '~__arg.default }}{% if not loop.last %}, {% endif %}{% endfor %}) {{ o.getResponse.getType is not empty ? ': ' ~ o.getResponse.getType }}</pre>
-
-        {# Tags #}
-        {{ include('vendor/caweb/phpdoc/inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
-
-        {% if o.getResponse.getType is not empty %}
-        <strong>Return values</strong>
-        <p class="small">{{ o.getResponse.getType }}</p>
-        {% endif %}
+        <strong class="d-block">{{ function.name }}()</strong>
+        <i class="small text-muted">{{ function.summary }}</i>
     </div>
-    {% endfor %}
+
+    <pre>{{ function.visibility ~ ' ' ~ function.name }}({% for __arg in function.arguments %}{{ __arg.types ? __arg.types|join('|')|replace({'\\': ''})~' ' }}{{ __arg.byReference ? '&' }}${{ __arg.name }}{{ __arg.default ? ' = '~__arg.default }}{% if not loop.last %}, {% endif %}{% endfor %}) {{ function.getResponse.getType is not empty ? ': ' ~ function.getResponse.getType }}</pre>
+
+    {# Tags #}
+    {{ include('vendor/caweb/phpdoc/inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+
+    {% if function.getResponse.getType is not empty %}
+    <strong>Return values</strong>
+    <p class="small">{{ function.getResponse.getType }}</p>
+    {% endif %}
 </div>
-{% endif %}
+{% endfor %}

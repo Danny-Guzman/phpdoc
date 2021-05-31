@@ -1,12 +1,87 @@
-{% set colorscheme = 'santa barbara' %}
 
 {# phpDocumentor Settings are not working as of v3.0.0 #}
+{% set state_version = '5.5' %}
 {% set stable_version = '1.5.3' %}
 {% set github_ref = 'https://github.com/' %}
 {% set github_user = 'CA-CODE-Works' %}
+{% set github_repo = 'CAWeb' %}
 {% set github_branch = 'dev' %}
+{% set colorschemes = {	
+    'Delta' : [
+        {'hex': 'A5BDC5', 'rgb' : '165,189,197'},
+        {'hex': '577786', 'rgb' : '87,119,13'},
+        {'hex': '46565E', 'rgb' : '70,86,94'},
+        {'hex': 'f5f9fa', 'rgb' : '245,249,250'},
+    ],
+    'Eureka' : [
+        {'hex': 'D9B295', 'rgb' : '217,178,149'},
+        {'hex': '3E4B4D', 'rgb' : '62,75,77'},
+        {'hex': '21272A', 'rgb' : '33,39,42'},
+        {'hex': 'f9f8f8', 'rgb' : '249,248,248'},
+    ],
+    'Mono' : [
+        {'hex': 'ffce2b', 'rgb' : '255,206,43'},
+        {'hex': '545351', 'rgb' : '84,84,84'},
+        {'hex': '191919', 'rgb' : '25,25,25'},
+        {'hex': 'f4f3ef', 'rgb' : '244,243,239'},
+    ],
+    'Oceanside' : [
+        {'hex': 'FDB81E', 'rgb' : '253,184,30'},
+        {'hex': '046B99', 'rgb' : '4,107,153'},
+        {'hex': '323A45', 'rgb' : '50,58,69'},
+        {'hex': 'E1F2F7', 'rgb' : '225,242,247'},
+    ],
+    'Orange County' : [
+        {'hex': 'fbad23', 'rgb' : '251,173,35'},
+        {'hex': 'A15801', 'rgb' : '161,88,1'},
+        {'hex': '483723', 'rgb' : '50,58,69'},
+        {'hex': 'f1ede4', 'rgb' : '225,242,247'},
+    ],
+    'Paso Robles' : [
+        {'hex': 'fbad23', 'rgb' : '251,173,35'},
+        {'hex': '691808', 'rgb' : '105,24,8'},
+        {'hex': '313131', 'rgb' : '49,49,49'},
+        {'hex': 'f5f5f5', 'rgb' : '245,245,245'},
+    ],
+    'Sacramento' : [
+        {'hex': '7bb0da', 'rgb' : '123,176,218'},
+        {'hex': '153554', 'rgb' : '21,53,84'},
+        {'hex': '730000', 'rgb' : '115,0,0'},
+        {'hex': 'e1ecf7', 'rgb' : '225,236,247'},
+    ],
+    'Santa Barbara' : [
+        {'hex': 'FF9B53', 'rgb' : '255,155,83'},
+        {'hex': '834B1E', 'rgb' : '131,75,30'},
+        {'hex': '3c2c29', 'rgb' : '60,44,41'},
+        {'hex': 'FFEBD7', 'rgb' : '255,235,215'},
+    ],
+    'Santa Cruz' : [
+        {'hex': 'f5811b', 'rgb' : '245,129,27'},
+        {'hex': '0f4f94', 'rgb' : '15,79,148'},
+        {'hex': '2c2c4f', 'rgb' : '44,44,79'},
+        {'hex': 'E1ECF7', 'rgb' : '225,236,247'},
+    ],
+    'Shasta' : [
+        {'hex': 'fbad23', 'rgb' : '251,173,35'},
+        {'hex': '336c39', 'rgb' : '51,108,57'},
+        {'hex': '3c4543', 'rgb' : '60,69,67'},
+        {'hex': 'effaf6', 'rgb' : '239,250,246'},
+    ],
+    'Sierra' : [
+        {'hex': 'fbad23', 'rgb' : '251,173,35'},
+        {'hex': '447766', 'rgb' : '68,119,102'},
+        {'hex': '194949', 'rgb' : '25,73,73'},
+        {'hex': 'effaf6', 'rgb' : '239,250,246'},
+    ],
+    'Trinity' : [
+        {'hex': 'c19e73', 'rgb' : '193,158,115'},
+        {'hex': '446a7c', 'rgb' : '68,106,124'},
+        {'hex': '21272a', 'rgb' : '33,39,42'},
+        {'hex': 'f9f8f8', 'rgb' : '249,248,248'},
+    ]
+} %}
 
-{% set gitub_href_link = github_ref ~ github_user ~ '/CAWeb/blob/' ~ github_branch ~ '/' %}
+{% set gitub_href_link = github_ref ~ github_user ~ '/' ~ github_repo ~ '/blob/' ~ github_branch ~ '/' %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -14,7 +89,13 @@
         {% block head %}
         {% endblock head %}
         
+        {% block colorscheme %}
+        <!-- Core CSS -->
+        <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-santa barbara.css">
+        {% endblock colorscheme %}
+        
         {{ include('/vendor/caweb/phpdoc/inc/head.html') }}
+        
     </head>
     <body class="primary non_divi_builder">
         {{ include('/vendor/caweb/phpdoc/inc/header.html') }}

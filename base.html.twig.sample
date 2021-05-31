@@ -1,0 +1,14 @@
+{% extends "vendor/caweb/phpdoc/layout.html.twig" %}
+
+{% block head %}
+<title>Title</title>
+{% endblock head %}
+
+{% block introduction %}
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{% endblock table_of_contents %}
+
+{% block body %}
+{% endblock body %}

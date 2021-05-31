@@ -1,15 +1,7 @@
-{% macro correct_default(__value) %}
-{% set val = __value|trim %}
-{% set val = val matches '/rue/' ? "true" : val %}
-{% set val = val matches '/ull/' ? "null" : val %}
-{% set val = val matches '/alse/' ? "false" : val %}
-{{ val~';' }}
-{% endmacro %}
-
 {% macro wp_hook_link(__link, __action) %}
 {% set invalid_hooks = ['publish_future_post'] %}
 
-{% set __link = 'https://developer.wordpress.org/reference/' ~ __link  %}
+{% set __link = 'https://developer.wordpress.org/reference/hooks/' ~ __link  %}
 
 {% if __action not in invalid_hooks %}
 <a target="_blank" href="{{ __link }}">{{ __action }}</a>

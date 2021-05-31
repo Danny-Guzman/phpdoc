@@ -2,6 +2,21 @@
 
 <nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
+        <li class="nav-item" title="Examples">
+            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <div class="sub-nav">
+                <div>
+                    <ul class="second-level-nav">
+                        <li class="unit1">
+                            <a href="{{ path('/')}}examples/index.html" class="second-level-link">Examples</a>
+                        </li>
+                        <li class="unit1" title="Icon Font Library">
+                            <a href="{{ path('/')}}examples/icon-library.html" class="second-level-link">Icon Font Library</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
         <li class="nav-item" title="How-To's">
             <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
@@ -22,9 +37,6 @@
             <div class="sub-nav">
                 <div>
                     <ul class="second-level-nav">
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="{{ path('/')}}icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
                         <li class="unit1" title="Actions and Filters">
                             <a href="{{ path('/')}}filters.html" class="second-level-link">Actions/Filters</a>
                         </li>
@@ -36,7 +48,7 @@
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="https://github.com/{{ __settings['github_user'] }}/CAWeb/archive/refs/tags/{{ __settings['stable_version'] }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="{{ github_ref ~ github_user ~ '/' ~ github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>

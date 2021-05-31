@@ -129,6 +129,13 @@
         {% endif %}
     {% endfor %}
 {% endfor %}
-{{ include('vendor/caweb/phpdoc/inc/functions.html') }}
+
+<div>
+    
+    {% if functions|length > 0 %}
+        <h2 id="functions">Functions</h2>
+    {% endif %}
+    {{ include('vendor/caweb/phpdoc/inc/functions.html') }}
+</div>
 
 {% endblock body %}
