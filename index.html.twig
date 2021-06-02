@@ -1,4 +1,4 @@
-{% extends "vendor/caweb/phpdoc/layout.html.twig" %}
+{% extends "layout.html.twig" %}
 
 {% block head %}
 <title>CAWeb Theme Documentation</title>
@@ -25,9 +25,10 @@
         </ul>
     </div>
     <div class="quarter">
-        {{ include('/vendor/caweb/phpdoc/inc/downloads.html') }}
+        {{ include('inc/downloads.html') }}
     </div>
 </div>
+
 {% endblock introduction %}
 
 {% block table_of_contents %}

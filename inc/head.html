@@ -2,8 +2,13 @@
 <!-- phpDoc CSS -->
 <link rel="stylesheet" href="{{ path('/') }}css/phpdoc.css">
 
-<!-- Core JS -->
+<!-- jQuery JS -->
+{% if 'true' == is_theme %}
 <script src="{{ path('/') }}js/jquery.js"></script>
+{% else %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js" type="text/javascript"></script>
+{% endif %}
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ path('/') }}favicon.ico">

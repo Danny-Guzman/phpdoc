@@ -1,5 +1,5 @@
-{% extends "vendor/caweb/phpdoc/layout.html.twig" %}
-{% import "vendor/caweb/phpdoc/macros.twig" as macros %}
+{% extends "layout.html.twig" %}
+{% import "macros.twig" as macros %}
 
 {% block head %}
 <title>CAWeb Theme Actions/Filters</title>
@@ -46,7 +46,7 @@
 
                 {% for entry in hooks %}
                     {% if "add_action" == entry|slice(0,10)  %}
-                        {{ include('vendor/caweb/phpdoc/inc/wp-hooks.html') }}
+                        {{ include('inc/wp-hooks.html') }}
                     {% endif %}
                 {% endfor %}
 
@@ -66,7 +66,7 @@
 
                 {% for entry in hooks %}
                     {% if "add_filter" == entry|slice(0,10)  %}
-                        {{ include('vendor/caweb/phpdoc/inc/wp-hooks.html') }}
+                        {{ include('inc/wp-hooks.html') }}
                     {% endif %}
                 {% endfor %}
 

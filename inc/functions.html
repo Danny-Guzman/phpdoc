@@ -12,7 +12,7 @@
     <pre>{{ function.visibility ~ ' ' ~ function.name }}({% for __arg in function.arguments %}{{ __arg.types ? __arg.types|join('|')|replace({'\\': ''})~' ' }}{{ __arg.byReference ? '&' }}${{ __arg.name }}{{ __arg.default ? ' = '~__arg.default }}{% if not loop.last %}, {% endif %}{% endfor %}) {{ function.getResponse.getType is not empty ? ': ' ~ function.getResponse.getType }}</pre>
 
     {# Tags #}
-    {{ include('vendor/caweb/phpdoc/inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+    {{ include('inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
 
     {% if function.getResponse.getType is not empty %}
     <strong>Return values</strong>

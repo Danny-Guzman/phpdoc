@@ -1,5 +1,6 @@
 
 {# phpDocumentor Settings are not working as of v3.0.0 #}
+{% set is_theme = 'true' %}
 {% set state_version = '5.5' %}
 {% set stable_version = '1.5.3' %}
 {% set github_ref = 'https://github.com/' %}
@@ -90,15 +91,21 @@
         {% endblock head %}
         
         {% block colorscheme %}
-        <!-- Core CSS -->
-        <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-santa barbara.css">
+        {% if 'true' == is_theme %}
+            <!-- CAWeb Theme CSS -->
+            <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-santa barbara.css">
+        {% else %}
+            <!-- State Template CDN CSS -->
+            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/cagov.core.css" rel="stylesheet">
+            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/colorscheme-santabarbara.css" rel="stylesheet">
+        {% endif %}
         {% endblock colorscheme %}
         
-        {{ include('/vendor/caweb/phpdoc/inc/head.html') }}
+        {{ include('inc/head.html') }}
         
     </head>
     <body class="primary non_divi_builder">
-        {{ include('/vendor/caweb/phpdoc/inc/header.html') }}
+        {{ include('inc/header.html') }}
 
         <div id="page-container">
             <div id="et-main-area">
@@ -119,9 +126,14 @@
         </div>
 
         <footer id="footer" class="global-footer hidden-print">
-            {{ include('/vendor/caweb/phpdoc/inc/footer.html') }}
-            <!-- Load template core -->
-            <script src="{{ path('/')  }}js/caweb.core.js"></script>
+            {{ include('inc/footer.html') }}
+            {% if 'true' == is_theme %}
+                <!-- CAWeb Theme JS -->
+                <script src="{{ path('/')  }}js/caweb-v{{ state_version }}.js"></script>
+            {% else %}
+                <!-- State Template CDN JS -->
+                <script src="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/js/cagov.core.js"></script>
+            {% endif %}
         </footer>
     </body>
 </html>
