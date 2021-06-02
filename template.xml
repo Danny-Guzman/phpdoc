@@ -7,10 +7,10 @@
     <version>1.0.0</version>
     <parameters>
         <!--parameter key="twig-debug">true</parameter-->
-        <parameter key="twig-extension">Symfony\Bridge\Twig</parameter>
+        <parameter key="twig-extension">caweb\\phpdoc\\Twig\\Plugin\\</parameter>
     </parameters>
     <transformations>
-        <transformation writer="twig" source="vendor/caweb/phpdoc/colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
+        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
         <!--transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
         <transformation writer="FileIo" query="copy" source="vendor/caweb/phpdoc/css/phpdoc.css" artifact="css/phpdoc.css" />
         <transformation writer="FileIo" query="copy" source="js/caweb-v5.5.js" artifact="js/caweb.core.js" />

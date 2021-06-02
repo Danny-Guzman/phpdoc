@@ -12,7 +12,11 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload": {
-        "psr-4": { "caweb\\phpdoc\\Twig\\Plugin\\": "" }
+        "psr-4": { "caweb\\phpdoc\\Twig\\Plugin\\": "" },
+        "files": [ "extension/URLExtension.php" ],
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     }
 }
 
