@@ -69,8 +69,12 @@
         {% if functions|length > 0 %}
         <li><a href="#functions">Functions</a></li>
         {% endif %}
+        {% if 'divi/extension/includes/modules/' == node.path|slice(0, 'divi/extension/includes/modules/'|length) %}
+        <li><a href="#module-example">Example</a></li>
+        {% endif %}
     </ul>
 </div>
+
 {% endblock table_of_contents %}
 
 
@@ -130,12 +134,15 @@
     {% endfor %}
 {% endfor %}
 
+{% if functions|length > 0 %}
 <div>
-    
-    {% if functions|length > 0 %}
-        <h2 id="functions">Functions</h2>
-    {% endif %}
+    <h2 id="functions">Functions</h2>
     {{ include('vendor/caweb/phpdoc/inc/functions.html') }}
 </div>
+{% endif %}
 
+{% if 'divi/extension/includes/modules/' == node.path|slice(0, 'divi/extension/includes/modules/'|length) %}
+<h2 id="module-example">Example</h2>
+<a href="{{ path('/') }}examples/module.html">{{ node.name}}</a>
+{% endif %}
 {% endblock body %}
