@@ -6,7 +6,7 @@
     <description>phpDocumentor Template Config File for the CAWeb WordPress Theme</description>
     <version>1.0.0</version>
     <parameters>
-        <parameter key="twig-debug">true</parameter>
+        <!--parameter key="twig-debug">true</parameter-->
     </parameters>
     <transformations>
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />

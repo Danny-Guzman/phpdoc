@@ -1,12 +1,13 @@
 
-{# phpDocumentor Settings are not working as of v3.0.0 #}
-{% set is_theme = 'true' %}
-{% set state_version = '5.5' %}
-{% set stable_version = '1.5.3' %}
+
+{% set is_theme = project.settings.custom.is_theme %}
+{% set stable_version = project.settings.custom.stable_version %}
+{% set state_version = 'true' == is_theme ? project.settings.custom.state_version|split('.', 3)|slice(0,2)|join('.') : project.settings.custom.state_version %}
+
 {% set github_ref = 'https://github.com/' %}
-{% set github_user = 'CA-CODE-Works' %}
-{% set github_repo = 'CAWeb' %}
-{% set github_branch = 'dev' %}
+{% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
+
+
 {% set colorschemes = {	
     'Delta' : [
         {'hex': 'A5BDC5', 'rgb' : '165,189,197'},
@@ -82,8 +83,6 @@
     ]
 } %}
 
-{% set gitub_href_link = github_ref ~ github_user ~ '/' ~ github_repo ~ '/blob/' ~ github_branch ~ '/' %}
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
@@ -96,8 +95,8 @@
             <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-santa barbara.css">
         {% else %}
             <!-- State Template CDN CSS -->
-            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/cagov.core.css" rel="stylesheet">
-            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/colorscheme-santabarbara.css" rel="stylesheet">
+            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/cagov.core.css" rel="stylesheet">
+            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/colorscheme-santabarbara.css" rel="stylesheet">
         {% endif %}
         {% endblock colorscheme %}
         
@@ -105,22 +104,24 @@
         
     </head>
     <body class="primary non_divi_builder">
-        {{ include('inc/header.html') }}
+        {% include 'inc/header.html' with {'github_ref': github_ref} %}
 
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
-                    <main class="main-primary">
-                        {% block introduction %}
-                        {% endblock introduction %}
-                        
-                        {% block table_of_contents %}
-                        {% endblock table_of_contents %}
-
-                        {% block body %}
-                        {% endblock body %}
-
-                    </main>
+                    <div class="section">
+                        <main class="main-primary">
+                            {% block introduction %}
+                            {% endblock introduction %}
+                            
+                            {% block table_of_contents %}
+                            {% endblock table_of_contents %}
+    
+                            {% block body %}
+                            {% endblock body %}
+    
+                        </main>
+                    </div>
                 </div>
             </div>
         </div>
@@ -132,7 +133,7 @@
                 <script src="{{ path('/')  }}js/caweb-v{{ state_version }}.js"></script>
             {% else %}
                 <!-- State Template CDN JS -->
-                <script src="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/js/cagov.core.js"></script>
+                <script src="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/js/cagov.core.js"></script>
             {% endif %}
         </footer>
     </body>

@@ -1,5 +1,3 @@
-{% set __settings = project.settings.custom %}
-
 <nav id="navigation" class="main-navigation dropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
         <li class="nav-item" title="Examples">
@@ -48,7 +46,7 @@
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="{{ github_ref ~ github_user ~ '/' ~ github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="{{ github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>

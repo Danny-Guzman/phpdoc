@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-{{ colorscheme|replace({' ': ''}) }}.css">
 {% else %}
     <!-- State Template CDN CSS -->
-    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/cagov.core.css" rel="stylesheet">
-    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}.21/css/colorscheme-{{ colorscheme|replace({' ': ''}) }}.css" rel="stylesheet">
+    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/cagov.core.css" rel="stylesheet">
+    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/colorscheme-{{ colorscheme|replace({' ': ''}) }}.css" rel="stylesheet">
 {% endif %}
 {% endblock head %}
 
