@@ -23,9 +23,9 @@
         {% endif %}
     {% endfor %}     
     {% if true == errors %}
-    <p><a href="reports/errors.html">Errors</a></p>
+    <p><a href="{{ path('reports/') }}errors.html">Errors</a></p>
     {% endif %}    
     {% if true == markers %}
-    <p><a href="reports/markers.html">Markers</a></p>
+    <p><a href="{{ path('reports/') }}markers.html">Markers</a></p>
     {% endif %}
 </div>

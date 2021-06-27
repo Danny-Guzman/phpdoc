@@ -20,6 +20,7 @@
         <transformation writer="twig" query="indexes.classes" source="classes.html.twig" />
         <transformation writer="twig" source="filters.html.twig" artifact="filters.html" />
         <transformation writer="twig" source="reports/errors.html.twig" artifact="reports/errors.html" />
+        <transformation writer="twig" source="reports/markers.html.twig" artifact="reports/markers.html" />
 
     </transformations>
 </template>

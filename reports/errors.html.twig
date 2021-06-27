@@ -1,65 +1,18 @@
-{% extends "layout.html.twig" %}
-
-{% set errors = [] %}
+{% set report = 'error' %}
+{% set reports = [] %}
 
 {% for file in project.files %}
 {% if file.getAllErrors() is not empty %}
 
-{% set errors = errors|merge([
+{% set reports = reports|merge([
     { 
         'filename' : file.getName(),
         'filepath' : file.getPath(),
-        'error' : file.getAllErrors()
+        'report' : file.getAllErrors()
     }
 ]) %}
 
 {% endif %}
 {% endfor %} 
 
-{% block head %}
-<title>{{ project.name }} Errors</title>
-{% endblock head %}
-
-{% block introduction %}
-<div class="offset-quarter ">
-    <h1 class="my-0">Errors</h1>
-</div>
-{% endblock introduction %}
-
-{% block table_of_contents %}
-<div class="offset-quarter ">
-    {% if errors is not empty %}
-    <h2 class="mt-1">Table of Contents</h2>
-    <div class="mt-3 border-bottom border-info">
-    {% for file in errors %}
-
-    <p><a href="#{{ file['filepath'] }}">{{ file['filepath'] }} <span class="badge badge-primary">{{ file['error']|length }}</span></a></p>
-
-    {% endfor %} 
-    </div>
-    {% endif %}
-</div>
-{% endblock table_of_contents %}
-
-{% block body %}
-<div class="offset-quarter">
-{% for file in errors %}
-    <div>
-        <p class="d-inline brd-dotted-1 border-top-0 border-left-0 border-right-0">{{ file['filepath'] }}</p>
-    </div>
-    <div class="row">
-        <div class="col-2">Type</div>
-        <div class="col-1">Line</div>
-        <div class="col-9">Description</div>
-    </div>
-    
-    {% for e in file['error'] %}
-    <div class="row">
-        <div class="col-2">{{ e.getSeverity() }}</div>
-        <div class="col-1">{{ e.getLine() }}</div>
-        <div class="col-9">{{ e.getCode() }}</div>
-    </div>
-    {% endfor %} 
-{% endfor %} 
-</div>
-{% endblock body %}
+{% extends "reports/reports.html.twig" %}
