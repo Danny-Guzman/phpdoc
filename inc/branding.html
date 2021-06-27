@@ -1,8 +1,11 @@
+{% set branding = 'true' == is_theme or 'true' == is_plugin ? path('/') ~ 'imgs/branding.png' : '' %}
+{% set branding = branding is empty ? state_cdn_url ~ '/images/template-logo.png' : branding %}
+
 <!-- Branding -->
 <div class="branding">
 	<div class="header-organization-banner">
 		<a href="{{ path('/') }}index.html">
-			<img src="{{ path('/') }}imgs/branding.png" alt="CAWeb Publishing" />
+			<img src="{{ branding }}" alt="{{ default_package_name }} Logo" />
 		</a>
 	</div>
 </div>

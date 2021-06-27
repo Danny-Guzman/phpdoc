@@ -1,36 +1,64 @@
 {% import "macros.twig" as macros %}
 
-{# get action_hook from entry #}
-{% set definition = entry|slice(11) %}
-{% set wp_action = definition|split(',')[0] %}
+{% set hook = hook ?? 'action' %}
+{% set is_self = is_self or is_self is null ? true : false %}
 
-{% set definition = definition|replace({ (wp_action ~ ',') : ""}) %}
-{% set wp_action = wp_action|replace({"'" : ""})|trim %}
+{% if loop.first %}
+<h2 id="{{ hook }}s" class="my-0">{{ hook|title }}s</h2>
+{% endif %}
 
-{% set wp_action_link = macros.wp_hook_corrections( wp_action )|trim %}
+{# iterate thru function tags, if function has category tag reference save it #}
+{% for tag_name,tags in function.tags %}
+{% if tag_name in ['category']  %}
+    {% set h = tags.0.description %}
 
-{# get action callback function from definition #}
-{% set callback = "'" == definition|trim|first ? definition|trim|slice(1)|split("'")[0] : definition|split(')')[0] ~ ')' %}
-{% set definition = "'" == definition|trim|first ? definition|replace({ ("'" ~ callback ~ "'") : ""}) : definition|replace({ (callback) : ""}) %}
+    {# get all hooks in category #}
+    {% set hooks = '{' == h|first ? h|slice(1, h|length - 2 )|trim|split('\n') : h|split('\n') %}
 
-{# get action priority and argument count from entry #}
-{% set priority = definition|split(',')[1] is not empty ? definition|split(',')[1] : '10' %}
-{% set arg_count = definition|split(',')[2] is not empty ? definition|split(',')[2]|replace({')' : '', ';' : ''}) : '' %}
+    {% for entry in hooks %}
+        {% if 'add_' ~ hook == entry|slice(0,10)  %}
+            {# get action_hook from entry #}
+            {% set definition = entry|slice(11) %}
+            {% set wp_action = definition|split(',')[0] %}
 
-<div class="border-bottom border-info mb-3">
-    <p>WordPress Hook: {{ macros.wp_hook_link(wp_action_link, wp_action) }}</p>
+            {% set definition = definition|replace({ (wp_action ~ ',') : ""}) %}
+            {% set wp_action = wp_action|replace({"'" : ""})|trim %}
 
-    {% if function.description is not empty %}
-    <p>Description: {{ function.description }}</p>
-    {% endif %}
-    
-    <p>Callback Function: <a href="#function_{{ callback }}">{{ callback }}</a></p>
-    
-    <p>Priority: {{ priority|replace({')' : '', ';' : ''}) }}</p>
-    
-    {% if arg_count is not empty %}
-    <p>Arguments: {{ arg_count }}</p>
-    {% endif %}
-    
-    <p>Source: <a target="_blank" href="{{  gitub_href_link ~ function.path ~ '#L' ~ function.line }}">{{ function.path }}</a> : {{ function.line }}</p>
-</div>
+            {% set wp_action_link = macros.wp_hook_corrections( wp_action )|trim %}
+
+            {# get action callback function from definition #}
+            {% set callback = "'" == definition|trim|first ? definition|trim|slice(1)|split("'")[0] : definition|split(')')[0] ~ ')' %}
+            {% set definition = "'" == definition|trim|first ? definition|replace({ ("'" ~ callback ~ "'") : ""}) : definition|replace({ (callback) : ""}) %}
+
+            {# get action priority and argument count from entry #}
+            {% set priority = definition|split(',')[1] is not empty ? definition|split(',')[1] : '10' %}
+            {% set arg_count = definition|split(',')[2] is not empty ? definition|split(',')[2]|replace({')' : '', ';' : ''}) : '' %}
+
+            <div class="border-bottom border-info mb-3">
+                <p>WordPress Hook: {{ macros.wp_hook_link(wp_action_link, wp_action) }}</p>
+
+                {% if function.description is not empty %}
+                <p>Description: {{ function.description }}</p>
+                {% endif %}
+                
+                {% if is_self %}
+                <p>Callback Function: <a href="#function_{{ callback }}">{{ callback }}</a></p>
+                {% else %}
+                {% set file_function_url = path('/files/') ~ function.path|replace({'/' : '-', '.php' : '.html'}) %}
+                <p>Callback Function: <a href="{{ file_function_url }}#function_{{ callback }}">{{ callback }}</a>
+                </p>
+                {% endif %}
+                <p>Priority: {{ priority|replace({')' : '', ';' : ''}) }}</p>
+                
+                {% if arg_count is not empty %}
+                <p>Arguments: {{ arg_count }}</p>
+                {% endif %}
+                
+                <p>Source: <a target="_blank" href="{{  gitub_href_link ~ function.path ~ '#L' ~ function.line }}">{{ function.path }}</a> : {{ function.line }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endif %}
+{% endfor %}
+

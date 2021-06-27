@@ -1,47 +1,53 @@
-<nav id="navigation" class="main-navigation dropdown hidden-print nav">
+<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
-        <li class="nav-item" title="Examples">
-            <a class="first-level-link"><span class="ca-gov-icon-gears"></span><span class="link-title">Examples <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="{{ path('/')}}examples/index.html" class="second-level-link">Examples</a>
-                        </li>
-                        <li class="unit1" title="Icon Font Library">
-                            <a href="{{ path('/')}}examples/icon-library.html" class="second-level-link">Icon Font Library</a>
-                        </li>
-                    </ul>
+
+        {% if project.settings.custom.nav_menu is not null %}
+        {% for nav_item in project.settings.custom.nav_menu|split(';') %}
+        {% set link_data = nav_item|split('{') %}
+        {% set main_link_data = link_data[0]|split(',') %}
+        {% set sub_nav_data = link_data|slice(1) %}
+            <li class="nav-item" title="{{ main_link_data[0] }}">
+                <a class="first-level-link">{% if main_link_data[1] is not empty %}<span class="ca-gov-icon-{{ main_link_data[1] }}"></span>{% endif %}<span class="link-title">{{ main_link_data[0] }} <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            
+            {% for sub_nav in sub_nav_data %}
+                {% set nav_data = sub_nav|split(',') %}
+
+                {% if loop.first %}
+                <div class="sub-nav">
+                    <div class="second-level-nav flex">
+                {% endif %}
+                        <a href="{{ path('/') ~ nav_data[2] }}" class="second-level-link" title="{{ nav_data[0] }}">
+                            {% if nav_data[1] is not empty %}
+                                <span class="ca-gov-icon-{{ nav_data[1] }} font-size-40"></span>
+                            {% endif %}
+                            <p class="h3 sub-nav-link">{{ nav_data[0] }}</p>
+                            {% if nav_data[3] is not empty %}
+                                <p class="link-description">{{ nav_data[3]|slice(0, nav_data[3]|length - 1) }}</p>
+                            {% endif %}
+                        </a>
+                {% if loop.last %}
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item" title="How-To's">
-            <a class="first-level-link"><span class="ca-gov-icon-info-bubble"></span><span class="link-title">How To's <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1">
-                            <a href="{{ path('/')}}how-to/gulp.html" class="second-level-link">Compile CSS/JS</a>
-                        </li>
-                        <li class="unit1">
-                            <a href="{{ path('/')}}how-to/enforce-wpcs.html" class="second-level-link">Enforce WPCS</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Theme Structure">
+                {% endif %}
+            {% endfor %}
+            </li>
+        {% endfor %}
+        {% endif %}
+        <li class="nav-item" title="Structure">
             <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
-                <div>
-                    <ul class="second-level-nav">
-                        <li class="unit1" title="Actions and Filters">
-                            <a href="{{ path('/')}}filters.html" class="second-level-link">Actions/Filters</a>
-                        </li>
-                        <li class="unit1" title="All Files">
-                            <a href="{{ path('/')}}files.html" class="second-level-link">All Files</a>
-                        </li>
-                    </ul>
+                <div class="second-level-nav flex">
+                    <a href="{{ path('/')}}filters.html" class="second-level-link" title="Actions and Filters">
+                        <span class="ca-gov-icon-filter font-size-40" aria-hidden="true"></span>
+                        <p class="h3 sub-nav-link">Actions/Filters</p>
+                        <p class="link-description">View all available WordPress actions/filters</p>
+                    </a>
+
+                    <a href="{{ path('/')}}files.html" class="second-level-link" title="All Files">
+                        <span class="ca-gov-icon-file font-size-40" aria-hidden="true"></span>
+                        <p class="h3 sub-nav-link">All Files</p>
+                        <p class="link-description">View all files</p>
+                    </a>
                 </div>
             </div>
         </li>

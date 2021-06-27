@@ -4,7 +4,7 @@
 {% extends "layout.html.twig" %}
 
 {% block head %}
-<title>CAWeb {{ colorscheme|title }} Colorscheme Example</title>
+<title>{{ project.name }} {{ colorscheme|title }} Colorscheme Example</title>
 {% if 'true' == is_theme %}
     <!-- CAWeb Theme CSS -->
     <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-{{ colorscheme|replace({' ': ''}) }}.css">

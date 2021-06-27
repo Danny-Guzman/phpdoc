@@ -1,12 +1,15 @@
-
+{% set default_package_name = project.versions[0].documentationSets[0].getSettings().defaultPackageName %}
 
 {% set is_theme = project.settings.custom.is_theme %}
+{% set is_plugin = project.settings.custom.is_plugin %}
+
 {% set stable_version = project.settings.custom.stable_version %}
+
 {% set state_version = 'true' == is_theme ? project.settings.custom.state_version|split('.', 3)|slice(0,2)|join('.') : project.settings.custom.state_version %}
+{% set state_cdn_url = 'https://california.azureedge.net/cdt/statetemplate/' ~ state_version %}
 
 {% set github_ref = 'https://github.com/' %}
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
-
 
 {% set colorschemes = {	
     'Delta' : [
@@ -104,23 +107,30 @@
         
     </head>
     <body class="primary non_divi_builder">
-        {% include 'inc/header.html' with {'github_ref': github_ref} %}
+        {% include 'inc/header.html' with {'github_ref': github_ref } %}
+
 
         <div id="page-container">
             <div id="et-main-area">
                 <div id="main-content" class="main-content" tabindex="-1">
-                    <div class="section">
-                        <main class="main-primary">
-                            {% block introduction %}
-                            {% endblock introduction %}
-                            
-                            {% block table_of_contents %}
-                            {% endblock table_of_contents %}
-    
-                            {% block body %}
-                            {% endblock body %}
-    
-                        </main>
+                    <main class="main-primary">
+                        <div class="section">
+                            <div class="container">
+                                {% block sidebar %}
+                                    {% include 'inc/sidebar.html' %}
+                                {% endblock %}
+                                {% block introduction %}
+
+                                {% endblock introduction %}
+                                    
+                                {% block table_of_contents %}
+                                {% endblock table_of_contents %}
+            
+                                {% block body %}
+
+                                {% endblock body %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

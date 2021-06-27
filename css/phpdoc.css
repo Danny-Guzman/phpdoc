@@ -9,10 +9,6 @@
     position: absolute;
 }
 
-.section + .section {
-    padding-top: 0px;
-}
-
 .multi-terminal-commands {
     background: whitesmoke;
     border: 1px solid #d6d6d6;

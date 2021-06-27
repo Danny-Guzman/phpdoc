@@ -1,3 +1,14 @@
+{% macro correct_class_name(__class) %}
+{{ __class|replace({'_':'-'}) }}
+{% endmacro correct_class_name %}
+
+{% macro correct_default_values(__val) %}
+{% set __val = __val|trim matches '/ull/' ? 'null' : __val|trim %}
+{% set __val = __val matches '/rue/' ? 'true' : __val  %}
+{% set __val =  __val matches '/alse/' ? 'false' : __val  %}
+{{ __val }}
+{% endmacro correct_default_values %}
+
 {% macro wp_hook_link(__link, __action) %}
 {% set invalid_hooks = ['publish_future_post'] %}
 

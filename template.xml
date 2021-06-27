@@ -6,34 +6,20 @@
     <description>phpDocumentor Template Config File for the CAWeb WordPress Theme</description>
     <version>1.0.0</version>
     <parameters>
-        <!--parameter key="twig-debug">true</parameter-->
+        <parameter key="twig-debug">true</parameter>
     </parameters>
     <transformations>
+        <!-- File Copies -->
+        <transformation writer="FileIo" query="copy" source="imgs/favicon.ico" artifact="favicon.ico" />
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
-        <transformation writer="FileIo" query="copy" source="imgs/caweb_logo.ico" artifact="favicon.ico" />
-        <transformation writer="FileIo" query="copy" source="imgs/caweb-logo.png" artifact="imgs/branding.png" />
-        <transformation writer="FileIo" query="copy" source="imgs/caweb_logo.png" artifact="imgs/caweb-logo.png" />
-        <transformation writer="FileIo" query="copy" source="imgs/gulp-tasks.png" artifact="imgs/gulp-tasks.png" />
+
+        <!-- Page Creations -->
         <transformation writer="twig" source="index.html.twig" artifact="index.html" />
-        <transformation writer="twig" source="gulp.html.twig" artifact="/how-to/gulp.html" />
-        <transformation writer="twig" source="enforce-wpcs.html.twig" artifact="/how-to/enforce-wpcs.html" />
-        <transformation writer="twig" query="indexes.classes" source="classes.html.twig" />
         <transformation writer="twig" query="files" source="files.html.twig" artifact="files.html" />
-        <transformation writer="twig" query="files" source="files.source.html.twig" />
+        <transformation writer="twig" query="files" source="files/file.source.html.twig" />
+        <transformation writer="twig" query="indexes.classes" source="classes.html.twig" />
         <transformation writer="twig" source="filters.html.twig" artifact="filters.html" />
-        <transformation writer="twig" source="icons.html.twig" artifact="examples/icon-library.html" />
-        <transformation writer="twig" source="examples.html.twig" artifact="examples/index.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/eureka.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/mono.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/oceanside.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/orange-county.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/paso-robles.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sacramento.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-barbara.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/santa-cruz.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/shasta.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/sierra.html" />
-        <transformation writer="twig" source="colorscheme.html.twig" artifact="examples/colorscheme/trinity.html" />
+        <transformation writer="twig" source="reports/errors.html.twig" artifact="reports/errors.html" />
+
     </transformations>
 </template>

@@ -1,33 +1,10 @@
 {% extends "layout.html.twig" %}
 
 {% block head %}
-<title>CAWeb Theme Documentation</title>
+<title>{{ project.name }} Documentation</title>
 {% endblock head %}
 
 {% block introduction %}
-<div class="section">
-    <div class="three-quarters">
-        <p>The CAWeb Theme is an open source WordPress Theme offered by the California Department of Technology to state agencies and departments within the State of California and fully integrates the <a href="https://template.webtools.ca.gov/" target="_blank">California State Template</a>.</p>
-        <p>CAWeb leverages <a href="https://github.com" target="_blank">GitHub</a> to provide for better collaboration and and encourages participation.</p>
-        <strong>Tools</strong>
-        <ul>
-            <li><a href="https://www.npmjs.com/" target="_blank">NPM</a>
-                <ul>
-                    <li><a href="https://gulpjs.com/" target="_blank">GULP</a> - used to compile all CSS & JS files for the theme.</li>
-                </ul>
-            </li>
-            <li><a href="https://getcomposer.org/" target="_blank">Composer</a>
-                <ul>
-                    <li><a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> - used to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.</li>
-                    <li><a href="https://www.phpdoc.org/" target="_blank">phpDocumentor</a> - used to document the theme.</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="quarter">
-        {{ include('inc/downloads.html') }}
-    </div>
-</div>
 
 {% endblock introduction %}
 
@@ -35,31 +12,7 @@
 {% endblock table_of_contents %}
 
 {% block body %}
-<div class="section">
-    <strong>WordPress Code Enforcement</strong>
-    <p>CAWeb utilizes <a href="https://github.com/WordPress/WordPress-Coding-Standards" target="_blank">WPCS</a> to enforce <a href="https://make.wordpress.org/core/handbook/best-practices/coding-standards/" target="_blank">WordPress Coding Standards</a>.
-        Make sure composer is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
-        For information on how to enforce the standards, see <a href="{{ path('/') }}how-to/enforce-wpcs.html">here</a>.
-    </p>
-    <div class="multi-terminal-commands">
-        <pre>composer --version</pre>
-        <pre>composer install --no-dev</pre>
-        <pre>.\vendor\bin\phpcs --version</pre>
-        <pre>.\vendor\bin\php-cs-fixer --version</pre>
-        <pre>.\vendor\bin\phpcbf --version</pre>
-    </div>
-</div>
-
-<div class="section">
-    <strong>Compiling CSS/JS</strong>
-    <p>CAWeb utilizes GULP to compile all CSS & JS files for the theme.
-        Make sure npm is installed along with necessary packages, from a terminal in the projects root directory run the commands below.
-        For more CAWeb Theme gulp tasks, see <a href="{{ path('/') }}how-to/gulp.html">here</a>.
-    </p>
-    <div class="multi-terminal-commands">
-        <pre>npm -v</pre>
-        <pre>npm install</pre>
-        <pre>gulp -v</pre>
-    </div>
-</div>
+        <div class="offset-quarter">
+            
+        </div>
 {% endblock body %}
