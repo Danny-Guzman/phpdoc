@@ -3,12 +3,8 @@
 <link rel="stylesheet" href="{{ path('/') }}css/phpdoc.css">
 
 <!-- jQuery JS -->
-{% if 'true' == is_theme %}
-<script src="{{ path('/') }}js/jquery.js"></script>
-{% else %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-migrate-3.3.2.min.js" type="text/javascript"></script>
-{% endif %}
+<script src="{{ path('/') }}js/jquery.js" type="text/javascript"></script>
+<script src="{{ path('/') }}js/jquery-migrate.min.js" type="text/javascript"></script>
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ path('/') }}favicon.ico">

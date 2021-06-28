@@ -10,8 +10,10 @@
     </parameters>
     <transformations>
         <!-- File Copies -->
-        <transformation writer="FileIo" query="copy" source="imgs/favicon.ico" artifact="favicon.ico" />
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
+        <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
+        <transformation writer="FileIo" query="copy" source="imgs/" artifact="imgs/" />
+        <transformation writer="FileIo" query="copy" source="js/" artifact="js/" />
 
         <!-- Page Creations -->
         <transformation writer="twig" source="index.html.twig" artifact="index.html" />

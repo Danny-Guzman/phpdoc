@@ -1,15 +1,9 @@
-{% set default_package_name = project.versions[0].documentationSets[0].getSettings().defaultPackageName %}
-
-{% set is_theme = project.settings.custom.is_theme %}
-{% set is_plugin = project.settings.custom.is_plugin %}
-
 {% set stable_version = project.settings.custom.stable_version %}
-
-{% set state_version = 'true' == is_theme ? project.settings.custom.state_version|split('.', 3)|slice(0,2)|join('.') : project.settings.custom.state_version %}
-{% set state_cdn_url = 'https://california.azureedge.net/cdt/statetemplate/' ~ state_version %}
 
 {% set github_ref = 'https://github.com/' %}
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
+
+{% set colorscheme = project.settings.custom.colorscheme %}
 
 {% set colorschemes = {	
     'Delta' : [
@@ -89,17 +83,14 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <link rel="stylesheet" href="{{ path('/') }}css/cagov.core.css">
+
         {% block head %}
         {% endblock head %}
         
         {% block colorscheme %}
-        {% if 'true' == is_theme %}
-            <!-- CAWeb Theme CSS -->
-            <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-santa barbara.css">
-        {% else %}
-            <!-- State Template CDN CSS -->
-            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/cagov.core.css" rel="stylesheet">
-            <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/colorscheme-santabarbara.css" rel="stylesheet">
+        {% if colorscheme is not empty %}
+        <link rel="stylesheet" href="{{ path('/') }}css/colorscheme-{{ colorscheme }}.css">
         {% endif %}
         {% endblock colorscheme %}
         
@@ -138,13 +129,7 @@
 
         <footer id="footer" class="global-footer hidden-print">
             {{ include('inc/footer.html') }}
-            {% if 'true' == is_theme %}
-                <!-- CAWeb Theme JS -->
-                <script src="{{ path('/')  }}js/caweb-v{{ state_version }}.js"></script>
-            {% else %}
-                <!-- State Template CDN JS -->
-                <script src="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/js/cagov.core.js"></script>
-            {% endif %}
+            <script src="{{ path('/')  }}js/cagov.core.js"></script>
         </footer>
     </body>
 </html>

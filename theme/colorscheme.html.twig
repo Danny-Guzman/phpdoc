@@ -5,14 +5,7 @@
 
 {% block head %}
 <title>{{ project.name }} {{ colorscheme|title }} Colorscheme Example</title>
-{% if 'true' == is_theme %}
-    <!-- CAWeb Theme CSS -->
-    <link rel="stylesheet" href="{{ path('/') }}css/cagov-v{{ state_version }}-{{ colorscheme|replace({' ': ''}) }}.css">
-{% else %}
-    <!-- State Template CDN CSS -->
-    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/cagov.core.css" rel="stylesheet">
-    <link href="https://california.azureedge.net/cdt/statetemplate/{{ state_version }}/css/colorscheme-{{ colorscheme|replace({' ': ''}) }}.css" rel="stylesheet">
-{% endif %}
+
 {% endblock head %}
 
 

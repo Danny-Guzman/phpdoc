@@ -12,7 +12,7 @@
 {% endblock introduction %}
 
 {% block table_of_contents %}
-<div class="offset-quarter ">
+<div class="offset-quarter mb-3">
     {% if reports is not empty %}
     <h2 class="my-0">Table of Contents</h2>
     <div class="border-bottom border-info">
@@ -27,17 +27,17 @@
 {% block body %}
 <div class="offset-quarter">
 {% for file in reports %}
-    <div>
+    <div class="mt-3">
         <p class="h3 d-inline brd-dotted-1 border-top-0 border-left-0 border-right-0">{{ file['filepath'] }}</p>
     </div>
-    <div class="row">
+    <div class="row no-gutters border-bottom border-dark">
         <div class="col-2">Type</div>
         <div class="col-1">Line</div>
         <div class="col-9">Description</div>
     </div>
     
     {% for e in file['report'] %}
-    <div class="row">
+    <div class="row no-gutters border-bottom border-info">
         <div class="col-2">{{ e.getSeverity() is not null ? e.getSeverity() : e['type'] }}</div>
         <div class="col-1">{{ e.getLine() is not null ? e.getLine() : e['line'] }}</div>
         <div class="col-9">{{ e.getCode() is not null ? e.getCode() : e['message'] }}</div>

@@ -11,7 +11,7 @@
 
 {% block table_of_contents %}
 <div class="offset-quarter">
-    <h2>All Files</h2>
+    <h2 class="mt-0">All Files</h2>
     {% set __index = '' %}
     {% for file in project.files|sort_asc %}
         {% set __new_index = file.name|first matches '/[0-9]/' ? '#' : file.name|first|upper %}
