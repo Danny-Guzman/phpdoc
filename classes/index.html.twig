@@ -14,9 +14,9 @@
 {% endblock head %}
 
 {% block introduction %}
-<div id="class-intro" class="offset-quarter border-bottom border-info">
+<div class="offset-quarter border-bottom border-info">
 
-<h1>{{ node.name }}</h1>
+<h1 class="my-0">{{ node.name }}</h1>
 
 {# Class Extends #}
 {% if node.parent|length > 0 %}
@@ -44,8 +44,8 @@
 {% block table_of_contents %}
 
 {# Table of Contents #}
-<div id="class-toc" class="offset-quarter mt-3 border-bottom border-info">
-    <h2>Table of Contents</h2>
+<div class="offset-quarter mt-3 border-bottom border-info">
+    <h2 class="my-0">Table of Contents</h2>
     {# Class Properties #}
     {% if node.properties|length > 0 %}
         {% for property in node.properties|sort_asc %}
@@ -71,7 +71,7 @@
 {# Class Properties #}
 {% if node.properties|length > 0 %}
 <div class="offset-quarter mt-3">
-    <h2>Properties</h2>
+    <h2 class="my-0">Properties</h2>
     {% for property in node.properties|sort_asc %}
     <div id="property_{{ property.name }}" class="border-bottom border-info">
         <div>
@@ -88,9 +88,9 @@
 {% endif %}
 
 {# Class Methods #}
-<div class="offset-quarter">
+<div class="offset-quarter mt-3">
     {% if functions|length > 0 %}
-        <h2 id="functions">Methods</h2>
+        <h2 class="my-0" id="functions">Methods</h2>
     {% endif %}
     {{ include('inc/functions.html', {'__prefix' : 'method'}) }}
 </div>

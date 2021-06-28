@@ -6,26 +6,11 @@
         {% endif %}
         {% if file.package.name not in packages %}
             {% set packages =  packages|merge([file.package.name]) %}
-            <p><a href="#">{{ file.package.name }}</a></p>
+            <p><a href="{{ path('packages/') ~ file.package.name }}.html">{{ file.package.name }}</a></p>
         {% endif %}
     {% endfor %}
 
     <h2 class="my-0">Reports</h2>
-    {% set errors = false %}
-    {% set markers = false %}
-
-    {% for file in project.files %}
-        {% if file.getAllErrors() is not empty %}
-        {% set errors = true %}
-        {% endif %}
-        {% if file.getMarkers() is not empty %}
-        {% set markers = true %}
-        {% endif %}
-    {% endfor %}     
-    {% if true == errors %}
     <p><a href="{{ path('reports/') }}errors.html">Errors</a></p>
-    {% endif %}    
-    {% if true == markers %}
     <p><a href="{{ path('reports/') }}markers.html">Markers</a></p>
-    {% endif %}
 </div>

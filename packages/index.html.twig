@@ -1,0 +1,80 @@
+{% extends "layout.html.twig" %}
+{% import 'macros.twig' as macros %}
+
+{% block head %}
+<title>{{ node.name }} Package</title>
+{% endblock head %}
+
+{% block introduction %}
+
+{% endblock introduction %}
+
+{% block table_of_contents %}
+{# classes,interfaces & traits #}
+<div class="offset-quarter">
+    {% if node.getInterfaces() is not empty or 
+        node.getClasses() is not empty or 
+        node.getTraits() is not empty %}
+    <h2 class="my-0">Classes, Interfaces & Traits</h2>
+    {% endif %}
+    {# classes #}
+    {% for class in node.getClasses()|sort_asc %}
+    <p class="mb-0{{ not loop.first ? ' mt-2' : '' }}">{{ macros.letter_icon('C') }} <a href="{{ path('/classes/') ~ macros.correct_class_name( class.getName() ) ~ '.html' }}">{{ class.getName() }}</a></p>
+    <small class="ml-4 font-italic">{{ class.getSummary() }}</small>
+    {% endfor %}
+    {# interfaces #}
+    {% for interface in node.getInterfaces()|sort_asc %}
+    <p class="mb-0{{ not loop.first ? ' mt-2' : '' }}">{{ interface.getName() }}</p>
+    <small class="ml-4 font-italic">{{ class.getSummary() }}</small>
+    {% endfor %}
+    {# traits #}
+    {% for trait in node.getTraits()|sort_asc %}
+    <p class="mb-0{{ not loop.first ? ' mt-2' : '' }}">{{ trait.getName() }}</p>
+    <small class="ml-4 font-italic">{{ class.getSummary() }}</small>
+    {% endfor %}
+</div>
+{# constants #}
+<div class="offset-quarter mt-3">
+    {% if node.getConstants() is not empty %}
+    <h2 class="my-0">Constants</h2>
+    {% endif %}
+    {# constants #}
+    {% for constant in node.getConstants()|sort_asc %}
+    <p>{{ macros.letter_icon('C', 'diamond') }} <a href="#constant_{{ constant.getName() }}">{{ constant.getName() }}</a></p>
+    {% endfor %}
+</div>
+{# functions #}
+<div class="offset-quarter mt-3">
+    {% if node.getFunctions() is not empty %}
+    <h2 class="my-0">Functions</h2>
+    {% endif %}
+    {# functions #}
+    {% for function in node.getFunctions()|sort_asc %}
+    <p class="mb-0{{ not loop.first ? ' mt-2' : '' }}">{{ macros.letter_icon('F', 'diamond') }} <a href="{{ path('/') ~ function.getFile()|route(presentation = 'url') }}#function_{{ function.getName() }}">{{ function.getName() }}()</a></p>
+    <small class="ml-4 font-italic">{{ function.getSummary() }}</small>
+    {% endfor %}
+</div>
+{% endblock table_of_contents %}
+
+{% block body %}
+{# constants #}
+<div class="offset-quarter mt-3">
+    {% if node.getConstants() is not empty %}
+    <h2 class="my-0">Constants</h2>
+    {% endif %}
+    {# constants #}
+    {% for constant in node.getConstants()|sort_asc %}
+    <div id="constant_{{ constant.getName() }}" class="mb-3{% if not loop.last %} border-bottom border-info{% endif %}">
+        <div>
+            <div class="pull-right">
+                <a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ constant.getFile().getPath() ~ '#L' ~ constant.getLine() }}">{{ constant.getFile().getPath() }}</a> : {{ constant.getLine() }}
+            </div>
+            <strong class="d-block">{{ constant.getName() }}</strong>
+        </div>
+    
+        <pre>define( '{{ constant.name }}', {{ constant.getValue() }} );</pre>
+    
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

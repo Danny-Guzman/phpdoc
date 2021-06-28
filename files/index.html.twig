@@ -84,7 +84,7 @@
     {% if loop.first %}
     <h2 id="classes" class="my-0">Classes</h2>
     {% endif %}
-    <a href="{{ path('/classes/') ~ macros.correct_class_name( class.name ) ~ '.html' }}"><span class="caweb-class mr-4"></span> {{ class.name }}</a>
+    <p>{{ macros.letter_icon('C') }} <a href="{{ path('/classes/') ~ macros.correct_class_name( class.name ) ~ '.html' }}">{{ class.name }}</a></p>
 {% endfor %}
 
 {# List any Action Hooks #}

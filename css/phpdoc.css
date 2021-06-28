@@ -1,12 +1,38 @@
-.caweb-class:before {
-    content: "C";
-    background-color: cornflowerblue;
-    padding: 3px 5px;
-    margin-top: 3px;
-    border-radius: 50%;
+.letter-icon:before {
+    color: white;
+    content: attr(data-letter);
     line-height: 0.75rem;
     font-size: 0.75rem;
+    vertical-align: middle;
+}
+/* Circle Icon */
+.letter-icon.circle {
+    border-radius: 50%;
+}
+.letter-icon.circle:before {
+    padding: 3px 5px;
+}
+/* Diamond Icon */
+.letter-icon.diamond {
+    border: 12px solid transparent;
+    position: relative;
+    top: -22px;
+    left: -5px;
+}
+.letter-icon.diamond:before{
     position: absolute;
+    top: 27px;
+    z-index: 2;
+    left: -4px;
+}
+.letter-icon.diamond:after {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 34px;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
 }
 
 .multi-terminal-commands {

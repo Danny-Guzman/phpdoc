@@ -3,7 +3,7 @@
 {% set github_ref = 'https://github.com/' %}
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
 
-{% set colorscheme = project.settings.custom.colorscheme %}
+{% set colorscheme = project.settings.custom.colorscheme is not empty ? project.settings.custom.colorscheme : 'santa barbara' %}
 
 {% set colorschemes = {	
     'Delta' : [
@@ -89,8 +89,8 @@
         {% endblock head %}
         
         {% block colorscheme %}
-        {% if colorscheme is not empty %}
-        <link rel="stylesheet" href="{{ path('/') }}css/colorscheme-{{ colorscheme }}.css">
+        {% if colorscheme %}
+        <link rel="stylesheet" href="{{ path('/') }}css/colorscheme-{{ colorscheme|replace({' ' : ''})|lower }}.css">
         {% endif %}
         {% endblock colorscheme %}
         
@@ -99,7 +99,18 @@
     </head>
     <body class="primary non_divi_builder">
         {% include 'inc/header.html' with {'github_ref': github_ref } %}
-
+        <style>{% apply spaceless %}
+            .letter-icon.circle {
+                background-color: #{{ colorschemes[colorscheme|title][1].hex }};
+            }
+            .letter-icon.diamond {
+                border-bottom-color: #{{ colorschemes[colorscheme|title][1].hex }};
+            }
+            .letter-icon.diamond:after {
+                border-top-color: #{{ colorschemes[colorscheme|title][1].hex }};
+            }
+            {% endapply %}
+            </style>
 
         <div id="page-container">
             <div id="et-main-area">

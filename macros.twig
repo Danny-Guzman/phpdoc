@@ -2,6 +2,10 @@
 {{ __class|replace({'_':'-'}) }}
 {% endmacro correct_class_name %}
 
+{% macro letter_icon(__letter, __shape = 'circle', __color = 'cornflowerblue') %}
+<span data-letter="{{ __letter }}" class="letter-icon {{ __shape }}"></span>
+{% endmacro letter_icon %}
+
 {% macro correct_default_values(__val) %}
 {% set __val = __val|trim matches '/ull/' ? 'null' : __val|trim %}
 {% set __val = __val matches '/rue/' ? 'true' : __val  %}
