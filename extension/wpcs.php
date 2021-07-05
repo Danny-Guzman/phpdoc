@@ -2,7 +2,7 @@
 
 namespace CAWeb\Twig;
 
-$vendorDir = dirname(dirname(dirname(__FILE__)));
+$vendorDir = dirname(dirname(dirname(__DIR__)));
 
 require_once $vendorDir . '/autoload.php';
 
@@ -13,7 +13,7 @@ use \Twig\TwigFunction;
 
 class WPCS_Twig_Extension extends AbstractExtension
 {
-        /**
+    /**
      * Returns the token parser instances to add to the existing list.
      *
      * @return \Twig\TokenParser\TokenParserInterface[]
@@ -70,6 +70,10 @@ class WPCS_Twig_Extension extends AbstractExtension
     public function getOperators(){
 
 	}
+    public function getName()
+    {
+        return 'caweb_wpcs';
+    }
 
     public function scan_file($file){
         return $file;
