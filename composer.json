@@ -10,6 +10,12 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4" : {
+            "WPCS_Twig_Extension\\" : "extension/"
+        }
+    }
+    
 }
 
