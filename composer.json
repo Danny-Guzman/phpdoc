@@ -14,7 +14,7 @@
         "php": ">=7.2.5",
         "twig/twig": "^2.0 | ^3.0",
         "phpdocumentor/phpdocumentor": "^3.0",
-        "symfony/string": "^5.3.3.0"
+        "symfony/string": "^5.1"
     },
     "autoload": {
         "psr-4" : {
