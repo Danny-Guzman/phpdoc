@@ -9,12 +9,11 @@
             "email": "guzmanjd86@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "require": {
         "php": ">=7.2.5",
         "twig/twig": "^2.0 | ^3.0",
-        "phpdocumentor/phpdocumentor": "^3.0",
-        "symfony/string": "^5.1"
+        "phpdocumentor/phpdocumentor": "^3.1"
     },
     "autoload": {
         "psr-4" : {
@@ -24,4 +23,3 @@
     }
     
 }
-

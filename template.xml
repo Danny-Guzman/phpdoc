@@ -7,7 +7,7 @@
     <version>1.0.0</version>
     <parameters>
         <parameter key="twig-debug">true</parameter>
-        <parameter key="twig-extension">CAWeb\Twig\WPCS_Twig_Extension</parameter>
+        <parameter key="twig-extension">CAWeb\Twig\</parameter>
     </parameters>
     <transformations>
         <!-- Externalization -->
