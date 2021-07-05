@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4" : {
-            "CAWeb\\Twig\\WPCS_Twig_Extension" : "extension/",
+            "CAWeb\\Twig\\" : "extension/",
             "": "extension/"
         }
     }
