@@ -7,11 +7,12 @@ $vendorDir = dirname(dirname(dirname(__DIR__)));
 require_once $vendorDir . '/autoload.php';
 
 use Twig\Extension\AbstractExtension;
-use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 use Twig\Environment;
-use \Twig\TwigFunction;
+use Twig\Loader\FilesystemLoader;
+use phpDocumentor\Transformer\Writer\Twig\ExtensionInterface;
 
-class WPCS_Twig_Extension extends AbstractExtension
+class WPCS_Twig_Extension extends AbstractExtension implements ExtensionInterface
 {
     /**
      * Returns the token parser instances to add to the existing list.
@@ -79,13 +80,11 @@ class WPCS_Twig_Extension extends AbstractExtension
         return $file;
     }
 }
-
-$loader = new FilesystemLoader( $vendorDir . '/caweb/phpdoc');
+$loader = new FilesystemLoader( $vendorDir . '\caweb\phpdoc');
 $twig = new Environment($loader, [
     'debug' => true,
     'auto_reload' => true
 ]);
 
 $twig->addExtension(new WPCS_Twig_Extension());
-
 ?>
