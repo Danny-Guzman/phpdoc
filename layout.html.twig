@@ -3,7 +3,8 @@
 {% set github_ref = 'https://github.com/' %}
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
 
-{% set colorscheme = project.settings.custom.colorscheme is not empty ? project.settings.custom.colorscheme : 'santa barbara' %}
+{% set colorscheme = colorscheme is not empty ? colorscheme : project.settings.custom.colorscheme %}
+{% set colorscheme = colorscheme is not empty ? colorscheme : 'santa barbara' %}
 
 {% set colorschemes = {	
     'Delta' : [
@@ -95,22 +96,26 @@
         {% endblock colorscheme %}
         
         {{ include('inc/head.html') }}
-        
-    </head>
-    <body class="primary non_divi_builder">
-        {% include 'inc/header.html' with {'github_ref': github_ref } %}
-        <style>{% apply spaceless %}
-            .letter-icon.circle {
-                background-color: #{{ colorschemes[colorscheme|title][1].hex }};
+        {# Dynamic Styles #}
+        {% apply spaceless %}
+        {% set icon_bg_color = colorschemes[colorscheme|title][1].hex %}
+        <style>
+            /* Dynamic Styles */ 
+            .letter-icon.circle,
+            .letter-icon.square {
+                background-color: #{{ icon_bg_color }};
             }
             .letter-icon.diamond {
-                border-bottom-color: #{{ colorschemes[colorscheme|title][1].hex }};
+                border-bottom-color: #{{ icon_bg_color }};
             }
             .letter-icon.diamond:after {
-                border-top-color: #{{ colorschemes[colorscheme|title][1].hex }};
+                border-top-color: #{{ icon_bg_color }};
             }
-            {% endapply %}
-            </style>
+        </style>
+        {% endapply %}
+    </head>
+    <body class="primary non_divi_builder">
+        {% include 'inc/header.html' %}
 
         <div id="page-container">
             <div id="et-main-area">
@@ -118,26 +123,37 @@
                     <main class="main-primary">
                         <div class="section">
                             <div class="container">
-                                {% block sidebar %}
-                                    {% include 'inc/sidebar.html' %}
-                                {% endblock %}
-                                {% block introduction %}
+                                    <!-- Sidebar -->
+                                    {% block sidebar %}
+                                    <div class="quarter">
 
-                                {% endblock introduction %}
-                                    
-                                {% block table_of_contents %}
-                                {% endblock table_of_contents %}
-            
-                                {% block body %}
+                                        {% include 'inc/sidebar.html' %}
+                                                                            
+                                        {% block sidebar_content %}
+                                        {% endblock %}
+                                    </div>
+                                    {% endblock %}
 
-                                {% endblock body %}
+                                    <!-- Introduction -->
+                                    {% block introduction %}
+                                    {% endblock introduction %}
+                                        
+
+                                    <!-- Table of Contents -->
+                                    {% block table_of_contents %}
+                                    {% endblock table_of_contents %}
+                
+                                    <!-- Body Content -->
+                                    {% block body %}
+                                    {% endblock body %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             {{ include('inc/footer.html') }}
             <script src="{{ path('/')  }}js/cagov.core.js"></script>

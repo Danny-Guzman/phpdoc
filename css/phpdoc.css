@@ -1,16 +1,18 @@
+/* Letter Icon General Styles */
+.letter-icon.letter-icon:not(.diamond) {
+    padding-bottom: 3px;
+}
 .letter-icon:before {
     color: white;
     content: attr(data-letter);
     line-height: 0.75rem;
     font-size: 0.75rem;
     vertical-align: middle;
+    padding: 5px;
 }
 /* Circle Icon */
 .letter-icon.circle {
     border-radius: 50%;
-}
-.letter-icon.circle:before {
-    padding: 3px 5px;
 }
 /* Diamond Icon */
 .letter-icon.diamond {
@@ -21,9 +23,9 @@
 }
 .letter-icon.diamond:before{
     position: absolute;
-    top: 27px;
+    top: 23px;
     z-index: 2;
-    left: -4px;
+    left: -7px;
 }
 .letter-icon.diamond:after {
     content: '';

@@ -40,7 +40,7 @@
     {% endif %}
     {# constants #}
     {% for constant in node.getConstants()|sort_asc %}
-    <p>{{ macros.letter_icon('C', 'diamond') }} <a href="#constant_{{ constant.getName() }}">{{ constant.getName() }}</a></p>
+    <p>{{ macros.letter_icon('C', 'square') }} <a href="#constant_{{ constant.getName() }}">{{ constant.getName() }}</a></p>
     {% endfor %}
 </div>
 {# functions #}

@@ -17,8 +17,6 @@
     {% endfor %}
 {% endfor %}
 
-{% set found_action, found_filter = false, false %}
-
 {% block head %}
     <title>{{ project.name }} {{node.path}} File</title>
 {% endblock head %}
@@ -26,7 +24,7 @@
 {% block introduction %}
 <div id="file-intro" class="offset-quarter border-bottom border-info">
         <h1 class="my-0">{{ node.path }}<a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path }}">
-                <span class="ca-gov-icon-link d-inline h4"></span>
+            {{ macros.cagov_icon('link', ['h4', 'd-inline']) }}
             </a>
         </h1>
     <i class="d-block">{{ node.summary }}</i>
@@ -37,6 +35,8 @@
 {% endblock introduction %}
 
 {% block table_of_contents %}
+{% set found_action, found_filter = false, false %}
+
 <div id="file-toc" class="mt-3 offset-quarter">
     <h2 class="my-0">Table of Contents</h2>
     
@@ -88,13 +88,11 @@
 {% endfor %}
 
 {# List any Action Hooks #}
-{% for function in functions %}
-    {% include 'inc/wp-hooks.html' %}
-{% endfor %}
+{% include 'inc/wp-hooks.html' with {'hook':'action', 'functions':functions} %}
+
 {# List any Filters #}
-{% for function in functions %}
-    {% include 'inc/wp-hooks.html' with {'hook':'filter'} %}
-{% endfor %}
+{% include 'inc/wp-hooks.html' with {'hook':'filter', 'functions':functions} %}
+
 {% if functions|length > 0 %}
 <div>
     <h2 id="functions" class="my-0">Functions</h2>
@@ -107,3 +105,4 @@
 {% endif %}
 </div>
 {% endblock body %}
+

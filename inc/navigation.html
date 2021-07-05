@@ -1,3 +1,4 @@
+{% import "macros.twig" as macros %}
 <nav id="navigation" class="main-navigation megadropdown hidden-print nav">
     <ul id="nav_list" class="top-level-nav">
 
@@ -7,8 +8,7 @@
         {% set main_link_data = link_data[0]|split(',') %}
         {% set sub_nav_data = link_data|slice(1) %}
             <li class="nav-item" title="{{ main_link_data[0] }}">
-                <a class="first-level-link">{% if main_link_data[1] is not empty %}<span class="ca-gov-icon-{{ main_link_data[1] }}"></span>{% endif %}<span class="link-title">{{ main_link_data[0] }} <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            
+                <a class="first-level-link">{% if main_link_data[1] is not empty %}{{ macros.cagov_icon( main_link_data[1], ['font-size-30', 'd-block'] ) }}{% endif %}<span class="link-title">{{ main_link_data[0] }} <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             {% for sub_nav in sub_nav_data %}
                 {% set nav_data = sub_nav|split(',') %}
 
@@ -18,7 +18,7 @@
                 {% endif %}
                         <a href="{{ path('/') ~ nav_data[2] }}" class="second-level-link" title="{{ nav_data[0] }}">
                             {% if nav_data[1] is not empty %}
-                                <span class="ca-gov-icon-{{ nav_data[1] }} font-size-40"></span>
+                                {{ macros.cagov_icon(nav_data[1], ['font-size-40', 'd-block']) }}
                             {% endif %}
                             <p class="h3 sub-nav-link">{{ nav_data[0] }}</p>
                             {% if nav_data[3] is not empty %}
@@ -34,17 +34,17 @@
         {% endfor %}
         {% endif %}
         <li class="nav-item" title="Structure">
-            <a class="first-level-link"><span class="ca-gov-icon-flowchart"></span><span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
+            <a class="first-level-link">{{ macros.cagov_icon('flowchart', ['font-size-30', 'd-block']) }}<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
             <div class="sub-nav">
                 <div class="second-level-nav flex">
                     <a href="{{ path('/')}}filters.html" class="second-level-link" title="Actions and Filters">
-                        <span class="ca-gov-icon-filter font-size-40" aria-hidden="true"></span>
+                        {{ macros.cagov_icon('filter', ['font-size-40', 'd-block']) }}
                         <p class="h3 sub-nav-link">Actions/Filters</p>
                         <p class="link-description">View all available WordPress actions/filters</p>
                     </a>
 
                     <a href="{{ path('/')}}files.html" class="second-level-link" title="All Files">
-                        <span class="ca-gov-icon-file font-size-40" aria-hidden="true"></span>
+                        {{ macros.cagov_icon('file', ['font-size-40', 'd-block']) }}
                         <p class="h3 sub-nav-link">All Files</p>
                         <p class="link-description">View all files</p>
                     </a>
@@ -52,7 +52,7 @@
             </div>
         </li>
         <li class="nav-item" title="Download">
-            <a href="{{ github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link"><span class="ca-gov-icon-download"></span><span class="link-title">Download</span></a>
+            <a href="{{ github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link">{{ macros.cagov_icon('download', ['font-size-30', 'd-block']) }}<span class="link-title">Download</span></a>
         </li>
     </ul>
 </nav>

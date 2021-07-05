@@ -17,7 +17,19 @@
     <h2 class="my-0">Table of Contents</h2>
     <div class="border-bottom border-info">
     {% for file in reports %}
-    <p><a href="#{{ file['filepath'] }}">{{ file['filepath'] }} <span class="badge badge-primary">{{ file['report']|length }}</span></a></p>
+    {% if loop.first %}
+    <ul class="list-overstated">
+    {% endif %}
+    {% apply spaceless %}
+    <li>
+        <a href="#{{ file['filepath'] }}">{{ file['filepath'] }} 
+            <span class="badge badge-primary">{{ file['report']|length }}</span>
+        </a>
+    </li>
+    {% endapply %}
+    {% if loop.last %}
+    </ul>
+    {% endif %}
     {% endfor %} 
     </div>
     {% endif %}

@@ -29,28 +29,27 @@
 
 {% block introduction %}
 <div class="offset-quarter">
-    <h1 class="my-0">CAWeb Actions/Filters</h1>
-    <p>This list should be viewed as a guide line or approximation of CAWeb Theme actions/filters.</p>
+    <h1 class="my-0">Actions/Filters</h1>
+    <p>This list should be viewed as a guide or approximation of the {{ project.name }} WordPress actions/filters.</p>
 </div>
 {% endblock introduction %}
 
 {% block table_of_contents %}
 <div class="offset-quarter">
     <h2 class="my-0">Table of Contents</h2>
-    <p><a href="#actions">Actions</a></p>
-    <p><a href="#filters">Filters</a></p>
+    <ul class="list-overstated">
+        <li><a href="#actions">Actions</a></li>
+        <li><a href="#filters">Filters</a></li>
+    </ul>
 </div>
 {% endblock table_of_contents %}
 
 {% block body %}
 <div class="offset-quarter">
     {# List any Action Hooks #}
-    {% for function in functions %}
-        {% include 'inc/wp-hooks.html' with {'is_self' : false } %}
-    {% endfor %}
+    {% include 'inc/wp-hooks.html' with {'hook':'action', 'functions':functions, 'is_self' : false} %}
 
-    {% for function in functions %}
-        {% include 'inc/wp-hooks.html' with {'hook':'filter', 'is_self' : false} %}
-    {% endfor %}
+    {# List any Filters #}
+    {% include 'inc/wp-hooks.html' with {'hook':'filter', 'functions':functions, 'is_self' : false} %}
 </div>
 {% endblock body %}
