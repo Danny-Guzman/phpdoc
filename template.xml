@@ -7,6 +7,7 @@
     <version>1.0.0</version>
     <parameters>
         <parameter key="twig-debug">true</parameter>
+        <parameter key="twig-extension">CAWeb\WPCS_Twig_Extension\</parameter>
     </parameters>
     <transformations>
         <!-- Externalization -->
@@ -30,7 +31,7 @@
         <!-- End Externalization -->
 
         <!-- Theme Specific Pages -->
-        <transformation writer="twig" source="theme/index.html.twig" artifact="index.html" />
+        <!--transformation writer="twig" source="theme/index.html.twig" artifact="index.html" /-->
         <transformation writer="twig" query="files" source="theme/files.html.twig" artifact="files.html" />
 
         <!-- Theme How To Pages -->
