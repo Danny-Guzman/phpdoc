@@ -7,10 +7,11 @@
     <version>1.0.0</version>
     <parameters>
         <parameter key="twig-debug">true</parameter>
-        <parameter key="twig-extension">CAWeb\Twig\</parameter>
+        <!--parameter key="twig-extension">Twig\\Extra\\String\\StringExtension</parameter-->
     </parameters>
     <transformations>
         <!-- Externalization -->
+        <!--transformation writer="twig" query="indexes.classes" source="classes/index.html.twig" artifact="examples/divi-modules/{{name}}.html" /-->
 
         <!-- File Copies -->
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
