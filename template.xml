@@ -11,8 +11,6 @@
     </parameters>
     <transformations>
         <!-- Externalization -->
-        <!--transformation writer="twig" query="indexes.classes" source="classes/index.html.twig" artifact="examples/divi-modules/{{name}}.html" /-->
-
         <!-- File Copies -->
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
         <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
@@ -43,6 +41,9 @@
 
         <!-- Examples -->
         <transformation writer="twig" source="theme/examples.html.twig" artifact="examples/index.html" />
+        
+        <!-- Modules -->
+        <transformation writer="twig" query="indexes.classes" source="theme/modules.html.twig" artifact="examples/modules.html" />
         
         <!-- Icon Font Library -->
         <transformation writer="twig" source="theme/icons.html.twig" artifact="examples/icon-library.html" />

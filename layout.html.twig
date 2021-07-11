@@ -1,3 +1,5 @@
+{% use "blocks/index.html" %}
+
 {% set stable_version = project.settings.custom.stable_version %}
 
 {% set github_ref = 'https://github.com/' %}
@@ -101,8 +103,7 @@
         {% set icon_bg_color = colorschemes[colorscheme|title][1].hex %}
         <style>
             /* Dynamic Styles */ 
-            .letter-icon.circle,
-            .letter-icon.square {
+            .letter-icon:not(.diamond):before {
                 background-color: #{{ icon_bg_color }};
             }
             .letter-icon.diamond {
@@ -126,10 +127,8 @@
                                     <!-- Sidebar -->
                                     {% block sidebar %}
                                     <div class="quarter">
-
-                                        {% include 'inc/sidebar.html' %}
-                                                                            
                                         {% block sidebar_content %}
+                                        {% include 'inc/sidebar.html' %}
                                         {% endblock %}
                                     </div>
                                     {% endblock %}

@@ -2,8 +2,9 @@
 {{ __class|replace({'_':'-'}) }}
 {% endmacro correct_class_name %}
 
-{% macro letter_icon(__letter, __shape = 'circle', __color = 'cornflowerblue') %}
-<span data-letter="{{ __letter }}" class="letter-icon {{ __shape }}"></span>
+{% macro letter_icon(__letter, __shape = 'circle',__additional_classes = []) %}
+<span data-letter="{{ __letter }}" class="letter-icon {{ __shape }} {{ __additional_classes|join(' ') }}">
+</span>
 {% endmacro letter_icon %}
 
 {% macro cagov_icon(__icon, __classes = []) %}

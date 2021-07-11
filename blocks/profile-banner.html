@@ -1,0 +1,31 @@
+{% block profile_banner %}
+{% set profile_banner_layout = profile_banner_layout is not empty ? profile_banner_layout : '' %}
+
+{% set is_round = 'round' == profile_banner_layout %}
+
+<div class="profile-banner{{ is_round ? ' round-image' : '' }}">
+    <div class="inner"{% if not is_round and profile_banner_image_src is not empty %} style="background:url({{ profile_banner_image_src }})"{% endif %}>
+        {% if is_round and profile_banner_image_src is not empty %}
+        <div class="profile-banner-img-wrapper">
+            <img src="{{ profile_banner_image_src }}" style="width: 90px; min-height: 90px;float: right;" {% if profile_banner_image_alt is not empty %}alt="{{ profile_banner_image_alt }}"{% endif %}/>
+        </div>
+        {% endif %}
+
+        {% if profile_banner_job_title is not empty %}
+        <div class="banner-subtitle">{{ profile_banner_job_title }}</div>
+        {% endif %}
+
+        {% if profile_banner_name is not empty %}
+        <div class="banner-title">{{ profile_banner_name }}</div>
+        {% endif %}
+
+        {% if profile_banner_url is not empty and profile_banner_url_text is not empty %}
+        <div class="banner-link">
+            <a href="{{ profile_banner_url }}">{{ profile_banner_url_text }}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock profile_banner %}
+ $job_title, $name, $url, $profile_link 
+ 
