@@ -106,52 +106,100 @@
         <div class="container">
             <h3 id="{{ display_name|lower }}" class="my-0">{{ display_name|replace({'_':' '}) }}</h3>
             <p>{{ module.getFile().getDescription() }}</p>
-            <div class="offset-quarter half">
                 {% if 'Card' == display_name %}
-                    {% block card %}
-                        {% set card_header_text = 'Card Header Text' %}
-                        {% set card_footer_text = 'Card Footer Text' %}
-                        {% set card_image_src = path('/') ~ 'imgs/samples/bobcat.jpg' %}
-                        {% set card_image_alt_text = 'Bobcat' %}
-                     
-                        {% set card_content %}
-                        <p>Card Content Here</p>
-                        {% endset %}
-             
-                        {{ parent() }}
-                         
-                    {% endblock card %}
-                {% elseif 'GitHub' == display_name %}
-                    {% block github %}
-                    {{ parent() }}
-                    {% endblock github %}
-                {% elseif 'Panel' == display_name %}
-                    {% block panel %}
-                    {% set panel_header_text = 'Panel Header Text' %}
-                    {% set panel_header_logo = 'info' %}
-                    {% set panel_read_more_url = '#panel' %}
-                    {% set panel_read_more_text = 'Learn More' %}
-
-                    {% set panel_content %}
-                    <p>Panel Content Here</p>
+                <div class="offset-quarter half">
+                    {% set card_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
                     {% endset %}
-         
-                    {{ parent() }}
-                    {% endblock panel %}
-                {% elseif 'Profile_Banner' == display_name %}
-                    {% block profile_banner %}
-                    {% set profile_banner_layout = 'round' %}
-                    {% set profile_banner_name = 'Profile Name' %}
-                    {% set profile_banner_job_title = 'Job Title' %}
-                    {% set profile_banner_url = '#profile_banner' %}
-                    {% set profile_banner_url_text = 'Profile Link' %}
-                    {% set profile_banner_image_src = path('/') ~ 'imgs/samples/guy.jpg' %}
-                    {% set profile_banner_image_alt = 'Male Portrait' %}
 
-                    {{ parent() }}
-                    {% endblock profile_banner %}
+                    {% set card_vars = {
+                        'card_header_text' : 'Card Header Text',
+                        'card_footer_text' : 'Card Footer Text',
+                        'card_image_src' : path('/') ~ 'imgs/samples/bobcat.jpg',
+                        'card_image_alt_text' : 'Bobcat',
+                        'card_content' : card_content
+                    } %}
+
+                    {% include 'blocks/card.html' with card_vars %}
+                </div>
+                {% elseif 'GitHub' == display_name %}
+                <div class="offset-quarter half">
+                {% include "blocks/github.html" %}
+                </div>
+                {% elseif 'Panel' == display_name %}
+                <div class="offset-quarter half">
+                    {% set panel_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+
+                    {% set panel_vars = {
+                        'panel_header_text' : 'Panel Header Text',
+                        'panel_header_logo' : 'info',
+                        'panel_read_more_url' : '#panel',
+                        'panel_read_more_text' : 'Learn More',
+                        'panel_content' : panel_content
+                    } %}
+
+                    {% include "blocks/panel.html" with panel_vars %}
+                </div>
+                {% elseif 'Profile_Banner' == display_name %}
+                <div class="offset-quarter half">
+                    {% set profile_banner_vars = {
+                        'profile_banner_name' : 'Profile Name',
+                        'profile_banner_job_title' : 'Job Title',
+                        'profile_banner_url' : '#profile_banner',
+                        'profile_banner_url_text' : 'Profile Link',
+                        'profile_banner_image_src' : path('/') ~ 'imgs/samples/guy.jpg',
+                        'profile_banner_image_alt' : 'Male Portrait'
+                    } %}
+
+                    {% include "blocks/profile-banner.html" with profile_banner_vars %}
+                </div>
+                {% elseif 'Location' == display_name %}
+                {# Location Contact #}
+                <div class="full">
+                    {% set location_contact_vars = {
+                        'layout' : 'contact',
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_icon' : 'road-pin',
+                        'location_phone' : '916 123-4567',
+                        'location_fax' : '916 890-1234',
+                        'location_url' : '#location',
+                    } %}
+                    
+                    {% include 'blocks/location.html' with location_contact_vars %}
+                </div>
+                {# Location Mini #}
+                <div class="full">
+                    {% set location_mini_vars = {
+                        'layout' : 'mini',
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_url' : '#location',
+                        'location_icon' : 'road-pin',
+                    } %}
+                    
+                    {% include 'blocks/location.html' with location_mini_vars %}
+                </div>
+                {# Location Banner #}
+                <div class="full">
+                    {% set location_description %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+                    
+                    {% set location_banner_vars = {
+                        'location_name' : 'Redwoods',
+                        'location_address' : '10860 Gold Center Drive, Rancho Cordova, CA',
+                        'location_view_more_url' : '#location',
+                        'location_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'location_image_alt' : 'Redwoods',
+                        'location_description' : location_description,
+                    } %}
+
+                    {% include 'blocks/location.html' with location_banner_vars %}
+                </div>
                 {% endif %}
-            </div>
         </div>        
     </div>
     {% endfor %}

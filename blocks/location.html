@@ -1,0 +1,78 @@
+{% set layout = layout is not null ? layout : 'banner' %}
+
+{% if location_address is not empty %}
+{% set map_link %}
+{% apply spaceless %}
+{% if 'banner' == layout %}
+<span class="ca-gov-icon-road-pin"></span>
+{% endif %}
+{% if 'contact' == layout and location_name is not empty %}
+{{ location_name }}<br />
+{% endif %}
+<a href="https://www.google.com/maps/place/{{ location_address }}" target="_blank">{{ location_address }}</a>
+{% endapply %}
+{% endset %}
+{% endif %}
+
+{% if location_view_more_url is not empty %}
+{% set location_view_more_button %}
+<a href="{{ location_view_more_url }}" class="btn" target="_blank">View More Details</a>
+{% endset %}
+{% endif %}
+<div class="location {{ layout }}">
+    {% if 'banner' == layout and location_image_src is not empty %}
+        <div class="thumbnail">
+            <img src="{{ location_image_src }}" class="w-100"{% if location_image_alt is not empty %} alt="{{ location_image_alt }}"{% endif %} />
+        </div>
+    {% elseif location_icon is not empty %}
+        <span class="ca-gov-icon-{{ location_icon }}"></span>
+    {% endif %}
+
+    {% if location_name is not empty or location_address is not empty %}
+    <div class="contact{{ 'mini' == layout and location_icon is empty ? ' ml-0' : '' }}">
+        {% if 'contact' != layout and location_name is not empty %}
+        <div class="title">
+            {% apply spaceless %}
+            {% if location_url is not empty %}
+            <a href="{{ location_url }}" target="_blank">
+            {% endif %}
+            {{ location_name }}
+            {% if location_url is not empty %}
+            </a>
+            {% endif %}
+            {% endapply %}
+        </div>
+        {% endif %}
+        {% if map_link is not empty %}
+        <div class="address">{{ map_link }}</div>
+        {% endif %}
+        {% if 'contact' == layout %}
+        {% if location_phone is not empty or location_fax is not empty  %}
+        {% apply spaceless %}
+        <p class="other">
+            {% if location_phone is not empty %}
+            General Information: {{ location_phone }}<br/>
+            {% endif %}
+            {% if location_fax is not empty  %}
+            FAX: {{ location_fax }}
+            {% endif %}
+        </p>
+        {% endapply %}
+        {% endif %}
+        {% if location_url is not empty %}
+        <a href="{{ location_url }}" class="btn" target="_blank">More</a>
+        {% endif %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if 'banner' == layout and location_description is not empty %}
+    <div class="summary">
+        <div class="title">Description</div>
+        <div class="description pb-2">{{ location_description }}</div>
+        {% if location_view_more_button is not empty %}
+        {{ location_view_more_button }}
+        {% endif %}
+    </div>
+    {% endif %}
+</div>

@@ -101,7 +101,8 @@
 {% endif %}
 {% if 'divi/extension/includes/modules/' == node.path|slice(0, 'divi/extension/includes/modules/'|length) %}
 <h2 id="module-example" class="my-0">Example</h2>
-<a href="{{ path('/') }}examples/module.html">{{ node.name}}</a>
+{% set display_name = node.getName()|replace({'.php':'', '-fullwidth':''}) %}
+<a href="{{ path('/') }}examples/modules.html#{{ display_name|replace({'-':'_'})|lower }}">{{ display_name|replace({'-':' '})|title }}</a>
 {% endif %}
 </div>
 {% endblock body %}
