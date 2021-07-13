@@ -143,8 +143,23 @@
                     {% include "blocks/panel.html" with panel_vars %}
                 </div>
                 {% elseif 'Profile_Banner' == display_name %}
-                <div class="offset-quarter half">
+                {# Squared Profile Banner #}
+                <div class="half">
                     {% set profile_banner_vars = {
+                        'profile_banner_name' : 'Profile Name',
+                        'profile_banner_job_title' : 'Job Title',
+                        'profile_banner_url' : '#profile_banner',
+                        'profile_banner_url_text' : 'Profile Link',
+                        'profile_banner_image_src' : path('/') ~ 'imgs/samples/guy.jpg',
+                        'profile_banner_image_alt' : 'Male Portrait'
+                    } %}
+
+                    {% include "blocks/profile-banner.html" with profile_banner_vars %}
+                </div>
+                {# Rounded Profile Banner #}
+                <div class="half">
+                    {% set profile_banner_vars = {
+                        'layout' : 'round',
                         'profile_banner_name' : 'Profile Name',
                         'profile_banner_job_title' : 'Job Title',
                         'profile_banner_url' : '#profile_banner',
@@ -198,6 +213,127 @@
                     } %}
 
                     {% include 'blocks/location.html' with location_banner_vars %}
+                </div>
+                {% elseif 'Section_Footer' == display_name %}
+                {# Section Footer #}
+                <div class="full">
+                    
+                    {% set section_footer_group_1 = {
+                        'title' : 'CAWeb',
+                        'links' : [ 
+                            {
+                                'text' : 'Features',
+                                'url' : 'https://caweb.cdt.ca.gov/2017/09/29/features/',
+                            }, 
+                            {
+                                'text' : 'Training Resources',
+                                'url' : 'https://caweb.cdt.ca.gov/training-resources/',
+                            }, 
+                            {
+                                'text' : 'News & Alerts',
+                                'url' : 'https://caweb.cdt.ca.gov/caweb-publishing-news/',
+                            },
+                            {
+                                'text' : 'Help',
+                                'url' : 'https://caweb.cdt.ca.gov/help/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_2 = {
+                        'title' : 'CAWeb FAQ\'s',
+                        'icon' : 'info',
+                        'links' : [ 
+                            {
+                                'text' : 'Service Overview',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-service-overview/',
+                            }, 
+                            {
+                                'text' : 'Cost & Rates',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-costrates/',
+                            }, 
+                            {
+                                'text' : 'Support',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-support/',
+                            },
+                            {
+                                'text' : 'Technical',
+                                'url' : 'https://caweb.cdt.ca.gov/faq-technical/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_3 = {
+                        'title' : 'CAWeb Help',
+                        'is_button' : true,
+                        'links' : [ 
+                            {
+                                'text' : 'Help',
+                                'url' : 'https://caweb.cdt.ca.gov/help/',
+                            }, 
+                            {
+                                'text' : 'On-Boarding',
+                                'url' : 'https://caweb.cdt.ca.gov/on-boarding/',
+                            }, 
+                            {
+                                'text' : 'Contact Us',
+                                'url' : 'https://caweb.cdt.ca.gov/contact-us/',
+                            },
+                            {
+                                'text' : 'Subscribe',
+                                'url' : 'https://caweb.cdt.ca.gov/caweb-news-form/',
+                            },
+                        ]
+                    } %}
+
+                    {% set section_footer_group_4 = {
+                        'title' : 'CAWeb Docs',
+                        'icon' : 'page',
+                        'is_button' : true,
+                        'links' : [ 
+                            {
+                                'text' : 'Change Management Presentation',
+                                'url' : 'https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2018/08/WordPress-Framework-Mgmt-v1.1.pptx',
+                            }, 
+                            {
+                                'text' : 'WordPress Overview Presentation',
+                                'url' : 'https://caweb.cdt.ca.gov/wp-content/uploads/sites/221/2018/08/CAWeb-Publishing-Overview.pptx',
+                            } 
+                        ]
+                    } %}
+
+                    {% set section_footer_groups = [ 
+                        section_footer_group_1, 
+                        section_footer_group_2,
+                        section_footer_group_3, 
+                        section_footer_group_4
+                    ] %}
+
+                    {% set section_footer_vars = {
+                        'section_footer_groups' : section_footer_groups,
+                    } %}
+
+                    {% include 'blocks/section-footer.html' with section_footer_vars %}
+
+                </div>
+                {% elseif 'Section_Primary' == display_name %}
+                {# Section Primary #}
+                <div class="full">
+                    {% set section_content %}
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, ante nec condimentum auctor, leo enim lacinia leo, sit amet consectetur nisl lorem eu enim. Phasellus suscipit augue sit amet rhoncus ultricies. Nulla placerat justo id leo sodales, vitae fringilla sapien auctor. </p>
+                    {% endset %}
+
+                    {% set section_banner_vars = {
+                        'section_heading' : 'Sample Heading',
+                        'section_link' : '#section_primary',
+                        'section_bg_color' : 'cornflowerblue',
+                        'section_image_src' : path('/') ~ 'imgs/samples/redwoods.jpg',
+                        'section_image_alt' : 'Redwoods',
+                        'section_content' : section_content,
+                    } %}
+
+                    {% include 'blocks/section-primary.html' with section_banner_vars %}
+
                 </div>
                 {% endif %}
         </div>        
