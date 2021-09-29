@@ -1,14 +1,18 @@
 {% set section_bg_color = section_bg_color is not null ? section_bg_color : '' %}
+{% set section_image_alignment = section_image_alignment is not null ? section_image_alignment : 'right' %}
 {% set body_class = '' %}
 
-<div class="section"{% if section_bg_color %} style="background-color: {{ section_bg_color }};" {% endif %}>
+
+
+<div class="section{% if 'right' == section_image_alignment %} pl-3{% endif %}"{% if section_bg_color %} style="background-color: {{ section_bg_color }};" {% endif %}>
+    {# Set Featured Image #}
     {% if section_image_src is not empty %}
         {% set body_class = 'col-md-15' %}
-        <div class="col-md-4 col-md-offset-0 animate-fadeInLeft pull-right pr-0">
+        <div class="col-md-4 col-md-offset-0 animate-fadeInLeft pull-{{ section_image_alignment }}">
             <img src="{{ section_image_src }}" class="img-responsive w-100"{% if section_image_alt is not empty %} alt="{{ section_image_alt }}" {% endif %}/>
         </div>
     {% endif %}
-
+    
     <div{% if body_class is not empty %} class="{{ body_class }}" {% endif %}>
         {% if section_heading is not empty %}
             <h2 class="my-0">{{ section_heading }}</h2>
@@ -22,4 +26,5 @@
         </div>
         {% endif %}    
     </div>
+    
 </div>
