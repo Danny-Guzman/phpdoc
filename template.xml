@@ -28,39 +28,5 @@
         <transformation writer="twig" query="indexes.packages" source="packages/index.html.twig" />
 
         <!-- End Externalization -->
-
-        <!-- Theme Specific Pages -->
-        <!--transformation writer="twig" source="theme/index.html.twig" artifact="index.html" /-->
-        <transformation writer="twig" query="files" source="theme/files.html.twig" artifact="files.html" />
-
-        <!-- Theme How To Pages -->
-        <transformation writer="twig" source="theme/enforce-wpcs.html.twig" artifact="/how-to/enforce-wpcs.html" />
-        
-        <transformation writer="FileIo" query="copy" source="theme/imgs/gulp-tasks.png" artifact="imgs/gulp-tasks.png" />
-        <transformation writer="twig" source="theme/gulp.html.twig" artifact="/how-to/gulp.html" />
-
-        <!-- Examples -->
-        <transformation writer="twig" source="theme/examples.html.twig" artifact="examples/index.html" />
-        
-        <!-- Modules -->
-        <transformation writer="twig" query="indexes.classes" source="theme/modules.html.twig" artifact="examples/modules.html" />
-        
-        <!-- Icon Font Library -->
-        <transformation writer="twig" source="theme/icons.html.twig" artifact="examples/icon-library.html" />
-
-        <!-- Colorscheme Examples -->
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/delta.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/eureka.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/mono.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/oceanside.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/orange-county.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/paso-robles.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/sacramento.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/santa-barbara.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/santa-cruz.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/shasta.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/sierra.html" />
-        <transformation writer="twig" source="theme/colorscheme.html.twig" artifact="examples/colorscheme/trinity.html" />
-
     </transformations>
 </template>
