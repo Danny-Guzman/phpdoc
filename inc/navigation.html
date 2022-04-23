@@ -33,26 +33,5 @@
             </li>
         {% endfor %}
         {% endif %}
-        <li class="nav-item" title="Structure">
-            <a class="first-level-link">{{ macros.cagov_icon('flowchart', ['font-size-30', 'd-block']) }}<span class="link-title">Structure <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            <div class="sub-nav">
-                <div class="second-level-nav flex">
-                    <a href="{{ path('/')}}filters.html" class="second-level-link" title="Actions and Filters">
-                        {{ macros.cagov_icon('filter', ['font-size-40', 'd-block']) }}
-                        <p class="h3 sub-nav-link">Actions/Filters</p>
-                        <p class="link-description">View all available WordPress actions/filters</p>
-                    </a>
-
-                    <a href="{{ path('/')}}files.html" class="second-level-link" title="All Files">
-                        {{ macros.cagov_icon('file', ['font-size-40', 'd-block']) }}
-                        <p class="h3 sub-nav-link">All Files</p>
-                        <p class="link-description">View all files</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item" title="Download">
-            <a href="{{ github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo }}/archive/refs/tags/{{ stable_version }}.zip" class="first-level-link">{{ macros.cagov_icon('download', ['font-size-30', 'd-block']) }}<span class="link-title">Download</span></a>
-        </li>
     </ul>
 </nav>
