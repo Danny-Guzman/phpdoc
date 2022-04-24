@@ -85,3 +85,7 @@
 .markdown-text{
     display: inline-block;
 }
+
+.markdown-text p{
+    margin: 0;
+}
