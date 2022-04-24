@@ -1,5 +1,5 @@
-{% macro markup(__text) %}
-<div class="markdown-text">{{ __text|markdown }}</div>
+{% macro markup(__text, __pre, __post) %}
+<div class="markdown-text">{{__pre}}{{ __text|markdown }}{{__post}}</div>
 {% endmacro markup %}
 
 {% macro search_obj_array(__arr, __key, __value, __column) %}
