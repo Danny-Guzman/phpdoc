@@ -88,4 +88,5 @@
 
 .markdown-text p{
     margin: 0;
+    display: inline;
 }
