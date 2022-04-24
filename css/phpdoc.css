@@ -81,3 +81,7 @@
 .multi-terminal-commands pre{
     display: table-row;
 }
+
+.markdown-text{
+    display: inline-block;
+}
