@@ -1,3 +1,7 @@
+{% macro markup(__text) %}
+<div class="markdown-text">{{ __text|markdown }}</div>
+{% endmacro markup %}
+
 {% macro correct_class_name(__class) %}
 {{ __class|replace({'_':'-'}) }}
 {% endmacro correct_class_name %}
