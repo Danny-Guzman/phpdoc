@@ -4,7 +4,9 @@
 
 {% macro terminal_command(__text) %}
  <div class="multi-terminal-commands d-inline-block align-middle">
-    <pre>{{ __text }}</pre>
+    {% for command in __text %}
+        <pre>{{ command }}</pre>
+    {% endfor %}
 </div>
 {% endmacro terminal_command %}
 
