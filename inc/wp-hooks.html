@@ -10,7 +10,7 @@
 
     {# iterate thru function tags, if function has category tag reference save it #}
     {% for tag_name,tags in function.tags %}
-    {% if tag_name in ['category']  %}
+    {% if tag_name in [ 'wp_' + hook ]  %}
         {% set h = tags.0.description %}
 
         {# get all hooks in category #}
