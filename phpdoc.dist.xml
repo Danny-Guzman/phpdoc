@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor configVersion="3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpdoc.org" xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd">
+    <paths>
+        <output>.docs</output>
+    </paths>
+    <title>CAWeb</title>
+    <version number="3.1.0">
+        <api>
+            <default-package-name>CAWeb</default-package-name>
+            <source dsn=".">
+            </source>
+            <ignore>
+                <path>vendor/**/*</path>
+                <path>node_modules/**/*</path>
+            </ignore>
+        </api>
+    </version>
+          
+    <template name="vendor/caweb/phpdoc/" location="vendor/caweb/phpdoc/" />
+
+</phpdocumentor>
