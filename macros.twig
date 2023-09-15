@@ -10,10 +10,6 @@
 </div>
 {% endmacro terminal_command %}
 
-{% macro search_obj_array(__arr, __key, __value, __column) %}
-{{ __arr|filter((k,v) => k[__key] == __value )|column(__column)|join('') }}
-{% endmacro search_obj_array %}
-
 {% macro correct_class_name(__class) %}
 {{ __class|replace({'_':'-'}) }}
 {% endmacro correct_class_name %}

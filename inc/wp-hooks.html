@@ -8,12 +8,12 @@
 
 {% for function in functions %}
 
-    {# iterate thru function tags, if function has category tag reference save it #}
+    {# iterate thru function tags, if function has wp_action/wp_filter tag reference save it #}
     {% for tag_name,tags in function.tags %}
-    {% if tag_name in [ 'wp_' + hook ]  %}
+    {% if tag_name in [ 'wp_' ~ hook ]  %}
         {% set h = tags.0.description %}
 
-        {# get all hooks in category #}
+        {# get all hooks in wp_action/wp_filter #}
         {% set hooks = '{' == h|first ? h|slice(1, h|length - 2 )|trim|split('\n') : h|split('\n') %}
 
         {% for entry in hooks %}
@@ -40,7 +40,8 @@
                 {% set arg_count = definition|split(',')[2] is not empty ? definition|split(',')[2]|replace({')' : '', ';' : ''}) : '' %}
 
                 <div class="border-bottom border-info mb-3">
-                    <p>WordPress Hook: {{ macros.wp_hook_link(wp_action_link, wp_action) }}</p>
+                    <p>WordPress Hook: {{ wp_action }}</p>
+                    {# macros.wp_hook_link(wp_action_link, wp_action) #}
 
                     {% if function.description is not empty %}
                     <p>Description: {{ function.description }}</p>

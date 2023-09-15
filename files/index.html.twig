@@ -47,30 +47,18 @@
         {% for function in functions %}
             {# iterate thru function tags, if function has category tag reference save it #}
             {% for tag_name,tags in function.tags %}
-                {% if tag_name in ['category']  %}
-                    {% set h = tags.0.description %}
-
-                    {# get all hooks in category #}
-                    {% set hooks = '{' == h|first ? h|slice(1, h|length - 2 )|trim|split('\n') : h|split('\n') %}
-
-                    {% for entry in hooks %}
-                        {% if "add_action" == entry|slice(0,10) and false == found_action  %}
-                            {% set found_action = true %}
-                            <li><a href="#actions">Actions</a></li>
-                        {% elseif "add_filter" == entry|slice(0,10) and false == found_filter %}
-                            {% set found_filter = true %}
-                            <li><a href="#filters">Filters</a></li>
-                        {% endif %}
-                    {% endfor %}
-
+                {% if tag_name in ['wp_action'] and not found_action  %}
+                    {% set found_action = true %}
+                    <li><a href="#actions">Actions</a></li>
+                {% endif %}
+                {% if tag_name in ['wp_filter'] and not found_filter  %}
+                    {% set found_filter = true %}
+                    <li><a href="#filters">Filters</a></li>
                 {% endif %}
             {% endfor %}
         {% endfor %}
         {% if functions|length > 0 %}
         <li><a href="#functions">Functions</a></li>
-        {% endif %}
-        {% if 'divi/extension/includes/modules/' == node.path|slice(0, 'divi/extension/includes/modules/'|length) %}
-        <li><a href="#module-example">Example</a></li>
         {% endif %}
     </ul>
 </div>
@@ -99,11 +87,5 @@
     {{ include('inc/functions.html') }}
 </div>
 {% endif %}
-{% if 'divi/extension/includes/modules/' == node.path|slice(0, 'divi/extension/includes/modules/'|length) %}
-<h2 id="module-example" class="my-0">Example</h2>
-{% set display_name = node.getName()|replace({'.php':'', '-fullwidth':''}) %}
-<a href="{{ path('/') }}examples/modules.html#{{ display_name|replace({'-':'_'})|lower }}">{{ display_name|replace({'-':' '})|title }}</a>
-{% endif %}
-</div>
 {% endblock body %}
 

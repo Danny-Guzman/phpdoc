@@ -1,37 +1,47 @@
 {% import "macros.twig" as macros %}
-<nav id="navigation" class="main-navigation megadropdown hidden-print nav">
-    <ul id="nav_list" class="top-level-nav">
+{% if project.settings.custom.nav_menu is not null %}
+    {# Get all top level nav items #}
+    {% set top_nav_items = project.settings.custom.nav_menu|split(';') %}
+    {% set isDropdown = false %}
 
-        {% if project.settings.custom.nav_menu is not null %}
-        {% for nav_item in project.settings.custom.nav_menu|split(';') %}
-        {% set link_data = nav_item|split('{') %}
-        {% set main_link_data = link_data[0]|split(',') %}
-        {% set sub_nav_data = link_data|slice(1) %}
-            <li class="nav-item" title="{{ main_link_data[0] }}">
-                <a class="first-level-link">{% if main_link_data[1] is not empty %}{{ macros.cagov_icon( main_link_data[1], ['font-size-30', 'd-block'] ) }}{% endif %}<span class="link-title">{{ main_link_data[0] }} <span class="ca-gov-icon-triangle-down carrot align-middle" aria-hidden="true"></span></span></a>
-            {% for sub_nav in sub_nav_data %}
-                {% set nav_data = sub_nav|split(',') %}
+    {# determine if menu is singlelevel or dropdown #}
+    {% for nav_items in top_nav_items %}
+        {% set isDropdown = isDropdown or nav_items|split('{')[1] is not null %}
+    {% endfor %}
+
+
+    <nav id="navigation" class="main-navigation nav hidden-print {{ isDropdown ? 'dropdown' : 'singlelevel' }}">
+        <ul id="nav_list" class="top-level-nav">
+        {% for nav_items in top_nav_items %}
+            {% set top_nav_data = nav_items|split('{')[0]|split(',') %}
+            {% set sub_nav_data = nav_items|split('{')|slice(1) %}
+            <li class="nav-item">
+                <a {{ top_nav_data[1] is not empty ? 'href=' ~ top_nav_data[1]  }} class="first-level-link text-left"><span class="link-title">{{ top_nav_data[0]|trim }}</span></a>
+
+                {% for sub_nav in sub_nav_data %}
+                {% set sub_nav_item = sub_nav|split(',') %}
 
                 {% if loop.first %}
                 <div class="sub-nav">
-                    <div class="second-level-nav flex">
+                    <div>
+                        <ul class="second-level-nav">
                 {% endif %}
-                        <a href="{{ path('/') ~ nav_data[2] }}" class="second-level-link" title="{{ nav_data[0] }}">
-                            {% if nav_data[1] is not empty %}
-                                {{ macros.cagov_icon(nav_data[1], ['font-size-40', 'd-block']) }}
-                            {% endif %}
-                            <p class="h3 sub-nav-link">{{ nav_data[0] }}</p>
-                            {% if nav_data[3] is not empty %}
-                                <p class="link-description">{{ nav_data[3]|slice(0, nav_data[3]|length - 1) }}</p>
-                            {% endif %}
-                        </a>
+                            <li class="unit1">
+                                <a {{ sub_nav_item[1] is not empty ? 'href=' ~ sub_nav_item[1]  }} class="second-level-link">
+                                    {{ sub_nav_item[0] }}
+                                    {% if sub_nav_item[2] is not empty %}
+                                        <div class="link-description">{{ sub_nav_item[2]|trim('}') }}</div>
+                                    {% endif %}
+                                </a>
+                            </li>
                 {% if loop.last %}
+                        </ul>
                     </div>
                 </div>
                 {% endif %}
-            {% endfor %}
+                {% endfor %}
             </li>
         {% endfor %}
-        {% endif %}
-    </ul>
-</nav>
+        </ul>
+    </nav>
+{% endif %}

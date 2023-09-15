@@ -10,16 +10,13 @@
 	{# Utility Header #}
     {{ include('inc/utility-header.html') }}
 
-	{# Settings Bar #}
-    {{ include('inc/settings-bar.html') }}
-
-	{# Settings Bar #}
+	{# Branding #}
     {{ include('inc/branding.html') }}
 
 	{# Mobile Controls #}
     {{ include('inc/mobile-controls.html') }}
 
-	<div class="navigation-search">
+	<div class="navigation-search full-width-nav container">
 
 		{# Navigation #}
 		{% include 'inc/navigation.html' with {'github_ref': github_ref } %}

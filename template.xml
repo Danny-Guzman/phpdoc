@@ -3,7 +3,7 @@
     <name>caweb</name>
     <author>Danny Guzman</author>
     <email>guzmanjd86@gmail.com</email>
-    <description>phpDocumentor Template Config File for the CAWeb WordPress Theme</description>
+    <description>Config File for the CA State phpDocumentor Template</description>
     <version>1.0.0</version>
     <parameters>
         <parameter key="twig-debug">true</parameter>
@@ -13,9 +13,7 @@
         <!-- Externalization -->
         <!-- File Copies -->
         <transformation writer="FileIo" query="copy" source="css/" artifact="css/" />
-        <transformation writer="FileIo" query="copy" source="fonts/" artifact="fonts/" />
         <transformation writer="FileIo" query="copy" source="imgs/" artifact="imgs/" />
-        <transformation writer="FileIo" query="copy" source="js/" artifact="js/" />
 
         <!-- Page Creations -->
         <transformation writer="twig" source="index.html.twig" artifact="index.html" />

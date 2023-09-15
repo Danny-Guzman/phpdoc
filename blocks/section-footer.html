@@ -14,7 +14,7 @@
             <li class="mb-2">
                 {% if links.text is not empty and links.url is not empty %}
                 <a href="{{ links.url }}" target="_blank" title="Section Footer Group {{ links.text }}"{% if true == group.is_button %} class="btn btn-default btn-xs"{% endif %}>
-                    {% if group.icon is not empty %}<span class="mr-1 ca-gov-icon-{{ group.icon }}"></span>{% endif %}{{ links.text }}
+                    {% if group.icon is not empty %}<span class="me-1 ca-gov-icon-{{ group.icon }}"></span>{% endif %}{{ links.text }}
                 </a>
                 {% endif %}
             </li>

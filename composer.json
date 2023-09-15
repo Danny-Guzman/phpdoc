@@ -1,7 +1,7 @@
 {
     "name": "caweb/phpdoc",
     "description": "CA State phpDocumentor Template",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -11,11 +11,14 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "phpdocumentor/shim": "^3.1"
+        "phpdocumentor/shim": "^3.4"
     },
     "config": {
         "allow-plugins": {
             "phpdocumentor/shim": true
         }
+    },
+    "scripts": {
+        "test": "php -t .docs -S localhost:8000"
     }
 }

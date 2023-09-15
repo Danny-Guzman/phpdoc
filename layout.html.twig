@@ -1,148 +1,58 @@
+{% set template_version = project.settings.custom.template_version ?? '6.2.1' %}
+{% set colorscheme = colorscheme is not empty ? colorscheme : project.settings.custom.colorscheme ?? 'oceanside' %}
+
 {% set stable_version = project.settings.custom.stable_version %}
 
 {% set github_ref = 'https://github.com/' %}
+{% set cdn_ref = 'https://california.azureedge.net/cdt/statetemplate/' %}
+
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
-
-{% set colorscheme = colorscheme is not empty ? colorscheme : project.settings.custom.colorscheme %}
-{% set colorscheme = colorscheme is not empty ? colorscheme : 'santa barbara' %}
-
-{% set colorschemes = {	
-    'Delta' : [
-        {'hex': 'A5BDC5', 'rgb' : '165,189,197'},
-        {'hex': '577786', 'rgb' : '87,119,13'},
-        {'hex': '46565E', 'rgb' : '70,86,94'},
-        {'hex': 'f5f9fa', 'rgb' : '245,249,250'},
-    ],
-    'Eureka' : [
-        {'hex': 'D9B295', 'rgb' : '217,178,149'},
-        {'hex': '3E4B4D', 'rgb' : '62,75,77'},
-        {'hex': '21272A', 'rgb' : '33,39,42'},
-        {'hex': 'f9f8f8', 'rgb' : '249,248,248'},
-    ],
-    'Mono' : [
-        {'hex': 'ffce2b', 'rgb' : '255,206,43'},
-        {'hex': '545351', 'rgb' : '84,84,84'},
-        {'hex': '191919', 'rgb' : '25,25,25'},
-        {'hex': 'f4f3ef', 'rgb' : '244,243,239'},
-    ],
-    'Oceanside' : [
-        {'hex': 'FDB81E', 'rgb' : '253,184,30'},
-        {'hex': '046B99', 'rgb' : '4,107,153'},
-        {'hex': '323A45', 'rgb' : '50,58,69'},
-        {'hex': 'E1F2F7', 'rgb' : '225,242,247'},
-    ],
-    'Orange County' : [
-        {'hex': 'fbad23', 'rgb' : '251,173,35'},
-        {'hex': 'A15801', 'rgb' : '161,88,1'},
-        {'hex': '483723', 'rgb' : '50,58,69'},
-        {'hex': 'f1ede4', 'rgb' : '225,242,247'},
-    ],
-    'Paso Robles' : [
-        {'hex': 'fbad23', 'rgb' : '251,173,35'},
-        {'hex': '691808', 'rgb' : '105,24,8'},
-        {'hex': '313131', 'rgb' : '49,49,49'},
-        {'hex': 'f5f5f5', 'rgb' : '245,245,245'},
-    ],
-    'Sacramento' : [
-        {'hex': '7bb0da', 'rgb' : '123,176,218'},
-        {'hex': '153554', 'rgb' : '21,53,84'},
-        {'hex': '730000', 'rgb' : '115,0,0'},
-        {'hex': 'e1ecf7', 'rgb' : '225,236,247'},
-    ],
-    'Santa Barbara' : [
-        {'hex': 'FF9B53', 'rgb' : '255,155,83'},
-        {'hex': '834B1E', 'rgb' : '131,75,30'},
-        {'hex': '3c2c29', 'rgb' : '60,44,41'},
-        {'hex': 'FFEBD7', 'rgb' : '255,235,215'},
-    ],
-    'Santa Cruz' : [
-        {'hex': 'f5811b', 'rgb' : '245,129,27'},
-        {'hex': '0f4f94', 'rgb' : '15,79,148'},
-        {'hex': '2c2c4f', 'rgb' : '44,44,79'},
-        {'hex': 'E1ECF7', 'rgb' : '225,236,247'},
-    ],
-    'Shasta' : [
-        {'hex': 'fbad23', 'rgb' : '251,173,35'},
-        {'hex': '336c39', 'rgb' : '51,108,57'},
-        {'hex': '3c4543', 'rgb' : '60,69,67'},
-        {'hex': 'effaf6', 'rgb' : '239,250,246'},
-    ],
-    'Sierra' : [
-        {'hex': 'fbad23', 'rgb' : '251,173,35'},
-        {'hex': '447766', 'rgb' : '68,119,102'},
-        {'hex': '194949', 'rgb' : '25,73,73'},
-        {'hex': 'effaf6', 'rgb' : '239,250,246'},
-    ],
-    'Trinity' : [
-        {'hex': 'c19e73', 'rgb' : '193,158,115'},
-        {'hex': '446a7c', 'rgb' : '68,106,124'},
-        {'hex': '21272a', 'rgb' : '33,39,42'},
-        {'hex': 'f9f8f8', 'rgb' : '249,248,248'},
-    ]
-} %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
-        <link rel="stylesheet" href="{{ path('/') }}css/cagov.core.css">
+        <link rel="stylesheet" href="{{ cdn_ref ~ template_version }}/css/cagov.core.css">
 
         {% block head %}
         {% endblock head %}
         
         {% block colorscheme %}
         {% if colorscheme %}
-        <link rel="stylesheet" href="{{ path('/') }}css/colorscheme-{{ colorscheme|replace({' ' : ''})|lower }}.css">
+        <link rel="stylesheet" href="{{ cdn_ref ~ template_version }}/css/colortheme-{{ colorscheme|replace({' ' : ''})|lower }}.css">
         {% endif %}
         {% endblock colorscheme %}
         
         {{ include('inc/head.html') }}
-        {# Dynamic Styles #}
-        {% apply spaceless %}
-        {% set icon_bg_color = colorschemes[colorscheme|title][1].hex %}
-        <style>
-            /* Dynamic Styles */ 
-            .letter-icon:not(.diamond):before {
-                background-color: #{{ icon_bg_color }};
-            }
-            .letter-icon.diamond {
-                border-bottom-color: #{{ icon_bg_color }};
-            }
-            .letter-icon.diamond:after {
-                border-top-color: #{{ icon_bg_color }};
-            }
-        </style>
-        {% endapply %}
+        
     </head>
     <body class="primary">
         {% include 'inc/header.html' %}
         <div id="page-container">
-            <div id="et-main-area">
-                <div id="main-content" class="main-content" tabindex="-1">
-                    <main class="main-primary">
-                        <div class="section">
-                            <div class="container">
-                                    <!-- Sidebar -->
-                                    {% block sidebar %}
-                                    <div class="quarter">
-                                        {% block sidebar_content %}
-                                        {% include 'inc/sidebar.html' %}
-                                        {% endblock %}
-                                    </div>
-                                    {% endblock %}
+            <div id="main-content" class="main-content" tabindex="-1">
+                <main class="main-primary">
+                    <div class="section">
+                         <div class="container">
+                            <!-- Sidebar -->
+                            {% block sidebar %}
+                            <div class="quarter">
+                                {% block sidebar_content %}
+                                {% include 'inc/sidebar.html' %}
+                                {% endblock %}
+                            </div>
+                            {% endblock %}
 
-                                    <!-- Introduction -->
-                                    {% block introduction %}
-                                    {% endblock introduction %}
+                            <!-- Introduction -->
+                            {% block introduction %}
+                            {% endblock introduction %}
                                         
 
-                                    <!-- Table of Contents -->
-                                    {% block table_of_contents %}
-                                    {% endblock table_of_contents %}
+                            <!-- Table of Contents -->
+                            {% block table_of_contents %}
+                            {% endblock table_of_contents %}
                 
-                                    <!-- Body Content -->
-                                    {% block body %}
-                                    {% endblock body %}
-                            </div>
+                            <!-- Body Content -->
+                            {% block body %}
+                            {% endblock body %}
                         </div>
                     </div>
                 </div>
@@ -152,7 +62,7 @@
         <!-- Footer -->
         <footer id="footer" class="global-footer hidden-print">
             {{ include('inc/footer.html') }}
-            <script src="{{ path('/')  }}js/cagov.core.js"></script>
+            <script src="{{ cdn_ref ~ template_version  }}/js/cagov.core.js"></script>
         </footer>
     </body>
 </html>
