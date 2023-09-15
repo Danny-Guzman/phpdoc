@@ -26,5 +26,4 @@
         4) Individual alert properties are separated by a comma with no spaces -->
     <setting name="alerts" value=" [{'heading' : 'Important','icon': 'info','msg' : 'This documentation was generated using phpDocumentor and the CA State phpDocumentor Template','link':'#','button':'Read More' }]" />
 
-
 </phpdocumentor>
