@@ -1,13 +1,12 @@
-{% set template_version = project.settings.custom.template_version %}
+{% set template_version = project.settings.custom.template_version ?? '6.2.1' %}
+{% set colorscheme = colorscheme is not empty ? colorscheme : project.settings.custom.colorscheme ?? 'oceanside' %}
+
 {% set stable_version = project.settings.custom.stable_version %}
 
 {% set github_ref = 'https://github.com/' %}
 {% set cdn_ref = 'https://california.azureedge.net/cdt/statetemplate/' %}
 
 {% set gitub_href_link = github_ref ~ project.settings.custom.github_user ~ '/' ~ project.settings.custom.github_repo ~ '/blob/' ~ project.settings.custom.github_branch ~ '/' %}
-
-{% set colorscheme = colorscheme is not empty ? colorscheme : project.settings.custom.colorscheme %}
-
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">

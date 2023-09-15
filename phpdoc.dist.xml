@@ -16,8 +16,8 @@
         </api>
     </version>
           
-    <setting name="template_version" value="6.2.1" />
-    <setting name="colorscheme" value="oceanside" />
+    <!--setting name="template_version" value="6.2.1" />
+    <setting name="colorscheme" value="sierra" /-->
 
     <!-- Alerts MUST BE:
         1) An array [] 
