@@ -1,0 +1,58 @@
+{# Get project alerts #}
+{% set alerts = project.settings.custom.alerts %}
+
+{# remove outer array brackets and separate different alerts #}
+{% set alerts = alerts|trim|trim('[', 'left')|trim(']', 'right')|trim|split('},{') %}
+
+{% for alert in alerts %}
+    {# get alert properties  #}
+    {% set properties = alert|trim|trim('{', 'left')|trim('}', 'right')|trim|split(",'") %}
+    {% set heading = null %}
+    {% set icon = null %}
+    {% set msg = null %}
+    {% set link = null %}
+    {% set button = null %}
+
+    {# iterate over each property #}
+    {% for attr in properties %}
+        {% set element = attr|split(':') %}
+        {% set key = element[0]|trim|trim("'", 'left')|trim("'", 'right')|trim %}
+        {% set value = element[1]|trim|trim("'", 'left')|trim("'", 'right')|trim %}
+
+        {% set heading = 'heading' == key ? value : heading %}
+        {% set icon = 'icon' == key ? value : icon  %}
+        {% set msg = 'msg' == key ? value : msg  %}
+        {% set link = 'link' == key ? value : link  %}
+        {% set button = 'button' == key ? value : button  %}
+
+    {% endfor %}
+
+
+<div class="alert alert-dismissible alert-banner alert-warning border-top border-dark alert-1">
+    <div class="container">
+        <!-- Alert Close Button -->
+        <button type="button" class="close caweb-alert-close" data-id="alert-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Alert Read More Button -->
+        {% if link is not null %}
+        <a href="{{ link }}" class="alert-link btn btn-default btn-xs" target="_blank">{{ button is not null ? button : 'Learn More' }}</a>
+        {% endif %}
+
+        <!-- Alert Header -->
+        {% if heading is not null %}
+        <span class="alert-level">
+            {% if icon is not null %}
+            <span class="ca-gov-icon-{{ icon }}" aria-hidden="true"></span>
+            {% endif %}
+            {{ heading }}
+        </span>
+        {% endif %}
+
+        <!-- Alert Text -->
+        {% if msg is not null %}
+        <span class="alert-text">{{ msg }}</span>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}

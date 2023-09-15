@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+{% import "macros.twig" as macros %}
+
+{% block head %}
+<title>{{ project.name }}</title>
+{% endblock head %}
+
+{% block sidebar %}
+    {{ parent() }}
+                                        
+    {% block sidebar_content %}
+    {{ parent() }}
+    {% endblock %}
+{% endblock %}
+
+{% block introduction %}
+<div class="offset-quarter">
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+<div class="offset-quarter">
+</div>
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+</div>
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends "layout.html.twig" %}
+{% import "macros.twig" as macros %}
+
+{% set functions = [] %}
+{# iterate thru all project files #}
+{% for obj in project.files %}
+    {# iterate thru all file functions #}
+    {% for f in obj.functions|sort_asc %}
+        {# Save function information #}
+        {% set functions = functions|merge([f]) %}
+    {% endfor %}
+
+    {# iterate thru classes in the file  #}
+    {% for class in obj.classes %}
+        {# iterate thru class methods #}
+        {% for c in class.methods|sort_asc %}
+            {# Save function information #}
+            {% set functions = functions|merge([c]) %}
+        {% endfor %}
+    {% endfor %}    
+{% endfor %}
+
+{% set functions = functions|sort((a, b) => a.name <=> b.name) %}
+
+{% block head %}
+<title>{{ project.name }} Actions/Filters</title>
+
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter">
+    <h1 class="my-0">Actions/Filters</h1>
+    <p>This list should be viewed as a guide or approximation of the {{ project.name }} WordPress actions/filters.</p>
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+<div class="offset-quarter">
+    <h2 class="my-0">Table of Contents</h2>
+    <ul class="list-overstated">
+        <li><a href="#actions">Actions</a></li>
+        <li><a href="#filters">Filters</a></li>
+    </ul>
+</div>
+{% endblock table_of_contents %}
+
+{% block body %}
+<div class="offset-quarter">
+    {# List any Action Hooks #}
+    {% include 'inc/wp-hooks.html' with {'hook':'action', 'functions':functions, 'is_self' : false} %}
+
+    {# List any Filters #}
+    {% include 'inc/wp-hooks.html' with {'hook':'filter', 'functions':functions, 'is_self' : false} %}
+</div>
+{% endblock body %}

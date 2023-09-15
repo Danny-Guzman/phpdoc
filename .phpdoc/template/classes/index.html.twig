@@ -1,0 +1,97 @@
+{% extends "layout.html.twig" %}
+{% import 'macros.twig' as macros %}
+
+
+{% set functions = [] %}
+{# iterate thru node methods #}
+{% for m in node.methods|sort_asc %}
+    {# Save function information #}
+    {% set functions = functions|merge([m]) %}
+{% endfor %}
+
+{% block head %}
+    <title>{{ project.name }} Classes Documentation</title>
+{% endblock head %}
+
+{% block introduction %}
+<div class="offset-quarter border-bottom border-info">
+
+<h1 class="my-0">{{ node.name }}</h1>
+
+{# Class Extends #}
+{% if node.parent|length > 0 %}
+    <p class="text-muted mb-0">extends {{ node.parent|replace({'\\': ''}) }}</p>
+{% endif %}
+
+{# Class Implements #}
+{% if node.interfaces|length > 0 %}
+    <p class="text-muted mb-0">Implements {{ node.interfaces|replace({'\\': ''}) }}</p>
+{% endif %}
+
+{# Class Package #}
+{% if node.package|length > 0 %}
+    <p class="text-muted mb-0">in package {{ node.package.name|replace({'\\': ''}) }}</p>
+{% endif %}
+
+{# Class Summary #}
+<i class="d-block">{{ node.summary }}</i>
+
+{# Class Tags #}
+{{ include('inc/tags.html', {'__tags': node.tags, '__attr': ['link', 'see']}) }}
+</div>
+{% endblock introduction %}
+
+{% block table_of_contents %}
+
+{# Table of Contents #}
+<div class="offset-quarter mt-3 border-bottom border-info">
+    <h2 class="my-0">Table of Contents</h2>
+    {# Class Properties #}
+    {% if node.properties|length > 0 %}
+        {% for property in node.properties|sort_asc %}
+        <div class="mb-2">
+            <p class="mb-0"><a href="{{ path('/classes/') ~ macros.correct_class_name(node.name) ~ '.html#property_' ~ property.name }}">${{ property.name }}</a> : {{ property.getType()|replace({'\\': ''}) }}</p>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    {# Class Methods #}
+    {% for function in functions %}
+    <div class="mb-2">
+        <p class="mb-0"><a href="{{ path('/classes/') ~ macros.correct_class_name(node.name) ~ '.html#method_' ~ function.name }}">{{ function.name }}()</a> {{ function.getResponse().getType() ? ': '~function.getResponse().getType()|join('|') }}</p>
+        <i class="small text-muted">{{ function.summary }}</i>
+    </div>
+    {% endfor %}
+    
+</div>
+{% endblock table_of_contents %}
+
+{% block body %}
+{# Class Properties #}
+{% if node.properties|length > 0 %}
+<div class="offset-quarter mt-3">
+    <h2 class="my-0">Properties</h2>
+    {% for property in node.properties|sort_asc %}
+    <div id="property_{{ property.name }}" class="border-bottom border-info">
+        <div>
+            <div class="pull-right">
+                <a target="_blank" class="ml-2 no-underline" href="{{ gitub_href_link ~ node.path ~ '#L' ~ property.line }}">${{ property.name }}</a> : {{ property.line }}
+            </div>
+            <strong class="d-block">${{ property.name }}</strong>
+            <i class="small text-muted">Member Variable</i>
+        </div>
+        <pre>{{ property.visibility }} {% if property.static %}static {% endif %}{{ property.getType()|replace({'\\': ''}) }} ${{ property.name }}{% if "" != property.default %} = {{ macros.correct_default_values(property.default)|spaceless }}{% else %}{% endif %};</pre>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{# Class Methods #}
+<div class="offset-quarter mt-3">
+    {% if functions|length > 0 %}
+        <h2 class="my-0" id="functions">Methods</h2>
+    {% endif %}
+    {{ include('inc/functions.html', {'__prefix' : 'method'}) }}
+</div>
+{% endblock body %}

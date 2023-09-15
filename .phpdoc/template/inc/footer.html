@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="d-flex">
+        <ul class="footer-links me-auto">
+            <!--li>
+                < not working with template 6.2.1 -->
+                <!--a href="#skip-to-content">Back to Top</a>
+            </li-->
+            {% if project.settings.custom.footer_menu is not null %}
+            {# Get all nav items #}
+            {% set top_nav_items = project.settings.custom.footer_menu|split(';') %}
+            {% for nav_items in top_nav_items %}
+            {% set top_nav_data = nav_items|split(',') %}
+            <li>
+                <a {{ top_nav_data[1] is not empty ? 'href=' ~ top_nav_data[1]  }}>{{ top_nav_data[0] }}</a>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="copyright">
+    <div class="container">
+		<div class="d-flex">
+            <i class="text-muted">Generated on {{ "now"|date("m/d/Y \\@ h:ia", 'America/Los_Angeles') }}</i>
+        </div> 
+    </div> 
+</div>

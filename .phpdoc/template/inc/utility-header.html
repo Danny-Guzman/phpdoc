@@ -1,0 +1,15 @@
+<!-- Utility Header -->
+<div class="utility-header hidden-print">
+	<div class="container">
+		<div class="flex-row">
+			<div class="social-media-links">
+                <a href="{{ path('/') }}index.html" title="Home" class="utility-home-icon ca-gov-icon-home"><span class="sr-only">Home</span></a>
+			</div>
+			<div class="settings-links">
+				{% if project.settings.custom.contact_url is not empty %}
+				<a class="utility-contact-us" href="{{ project.settings.custom.contact_url }}">Contact Us</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

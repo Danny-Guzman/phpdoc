@@ -5,5 +5,5 @@
 composer.lock
 package-lock.json
 .docs/
-.phpdoc/
+.phpdoc/cache/
 tests/

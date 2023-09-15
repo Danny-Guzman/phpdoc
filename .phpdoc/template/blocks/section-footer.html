@@ -1,0 +1,28 @@
+{% set section_bg_color = section_bg_color is not null ? section_bg_color : '' %}
+
+<div class="section pt-0"{% if section_bg_color %} style="background-color: {{ section_bg_color }};" {% endif %}>
+    {% for group in section_footer_groups %}
+        <div class="quarter">
+            {% if group.title is not empty %}
+            <h4 class="my-0">{{ group.title }}</h4>
+            {% endif %}
+
+        {% for links in group.links %}
+            {% if loop.first %}
+            <ul class="list-unstyled">
+            {% endif %}
+            <li class="mb-2">
+                {% if links.text is not empty and links.url is not empty %}
+                <a href="{{ links.url }}" target="_blank" title="Section Footer Group {{ links.text }}"{% if true == group.is_button %} class="btn btn-default btn-xs"{% endif %}>
+                    {% if group.icon is not empty %}<span class="me-1 ca-gov-icon-{{ group.icon }}"></span>{% endif %}{{ links.text }}
+                </a>
+                {% endif %}
+            </li>
+            {% if loop.last %}
+            </ul>
+            {% endif %}
+        {% endfor %}
+
+        </div>
+    {% endfor %}
+</div>

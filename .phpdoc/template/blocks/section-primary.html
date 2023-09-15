@@ -1,0 +1,30 @@
+{% set section_bg_color = section_bg_color is not null ? section_bg_color : '' %}
+{% set section_image_alignment = section_image_alignment is not null ? section_image_alignment : 'right' %}
+{% set body_class = '' %}
+
+
+
+<div class="section{% if 'right' == section_image_alignment %} pl-3{% endif %}"{% if section_bg_color %} style="background-color: {{ section_bg_color }};" {% endif %}>
+    {# Set Featured Image #}
+    {% if section_image_src is not empty %}
+        {% set body_class = 'col-md-15' %}
+        <div class="col-md-4 col-md-offset-0 animate-fadeInLeft pull-{{ section_image_alignment }}">
+            <img src="{{ section_image_src }}" class="img-responsive w-100"{% if section_image_alt is not empty %} alt="{{ section_image_alt }}" {% endif %}/>
+        </div>
+    {% endif %}
+    
+    <div{% if body_class is not empty %} class="{{ body_class }}" {% endif %}>
+        {% if section_heading is not empty %}
+            <h2 class="my-0">{{ section_heading }}</h2>
+        {% endif %}    
+        {% if section_content is not empty %}
+            {{ section_content }}
+        {% endif %}   
+        {% if section_link is not empty %}
+        <div>
+            <a href="{{ section_link }}" class="btn btn-default" target="_blank">More Information{% if section_heading is not empty %}<span class="sr-only">More information about {{ section_heading }}</span>{% endif %}</a>
+        </div>
+        {% endif %}    
+    </div>
+    
+</div>

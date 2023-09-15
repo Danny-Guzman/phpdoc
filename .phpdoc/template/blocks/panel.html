@@ -1,0 +1,25 @@
+{% set layout = layout is not null ? layout : 'default' %}
+<div class="panel panel-{{ layout }}">
+
+    {% if panel_header_text is not empty %}
+    <div class="panel-heading">
+        <h2>
+            {% if panel_header_logo is not empty %}
+            <span class="ca-gov-icon-{{ panel_header_logo }}"></span>
+            {% endif %}
+            {{ panel_header_text }}
+        </h2>
+        {% if panel_read_more_text is not empty and panel_read_more_url is not empty %}
+        <div class="options pl-2">
+            <a href="{{ panel_read_more_url }}" class="btn btn-default" target="_blank">{{ panel_read_more_text }}</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if panel_content is not empty %}
+    <div class="panel-body">
+        {{ panel_content }}
+    </div>
+    {% endif %}
+</div>

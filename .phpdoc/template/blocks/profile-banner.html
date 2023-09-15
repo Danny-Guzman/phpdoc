@@ -1,0 +1,29 @@
+{% set layout = layout is not empty ? layout : '' %}
+
+{% set is_round = 'round' == layout %}
+
+<div>
+    <figure class="p-a{{ is_round ? ' border-0 bg-greylight-radialgradient' : ' bg-white border rounded' }}">
+        <div class="media">
+            {% if profile_banner_image_src is not empty %}
+            <div class="d-flex m-r-md">
+                <img class="width-80 height-80{{ is_round ? ' rounded-circle' : ''}}" src="{{ profile_banner_image_src }}"{% if profile_banner_image_alt is not empty %} alt="{{ profile_banner_image_alt }}"{% endif %}>
+            </div>
+            {% endif %}
+            <div class="media-body">
+                {% if profile_banner_name is not empty %}
+                <h3 class="h4 m-0">{{ profile_banner_name }}</h3>
+                {% endif %}
+                {% if profile_banner_job_title is not empty %}
+                <div class="d-block">
+                    <span class="font-size-13">{{ profile_banner_job_title }}</span>
+                </div>
+                {% endif %}
+                    
+                {% if profile_banner_url is not empty and profile_banner_url_text is not empty %}
+                <a href="{{ profile_banner_url }}" class="font-size-12">{{ profile_banner_url_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+    </figure>
+</div> 
