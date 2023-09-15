@@ -24,7 +24,7 @@
         2) Individual alerts are objects {} in the array
         3) Individual alerts are separated by a comma with no spaces 
         4) Individual alert properties are separated by a comma with no spaces -->
-    <setting name="alerts" value=" [{'heading' : 'Important','icon': 'info','msg' : 'This documentation was generated using phpDocumentor and the CA State phpDocumentor Template','link':'#','button':'Read More' }]" />
+    <!--setting name="alerts" value=" [{'heading' : 'Important','icon': 'info','msg' : 'This documentation was generated using phpDocumentor and the CA State phpDocumentor Template','link':'#','button':'Read More' }]" /-->
 
     <template name="."  />
 
