@@ -1,7 +1,7 @@
 {
     "name": "caweb/phpdoc",
     "description": "CA State phpDocumentor Template",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
